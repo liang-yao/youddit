@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Youddit</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -17,10 +17,76 @@
                 padding-bottom: 40px;
             }
         </style>
-        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <!-- <link rel="stylesheet" href="css/bootstrap-responsive.min.css"> -->
+        <link rel="stylesheet" href="css/bootstrap-responsive.css">
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="http://www.youtube.com/player_api"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        
+
+        <script>
+            // handle keyboard arrow key navigation
+            $(document).keydown(function(e){
+                switch(e.which) {
+                    case 37: // left
+                        console.log('left pressed!');
+                        break;
+        
+                    case 38: // up
+                        console.log('up pressed!');
+                        break;
+        
+                    case 39: // right
+                        console.log('right pressed!');
+                        nextVideo();
+                        break;
+        
+                    case 40: // down
+                        console.log('down pressed!');
+                        break;
+        
+                    default: return; // exit this handler for other keys
+                }
+                e.preventDefault();
+            });
+            
+            // create youtube player
+            var player;
+            function onYouTubePlayerAPIReady() {
+                player = new YT.Player('player', {
+                  height: '390',
+                  width: '640',
+                  videoId: 'oRYaGpDUfYU',
+                  events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                  }
+                });
+            }
+        
+            // autoplay video
+            function onPlayerReady(event) {
+                event.target.playVideo();
+            }
+        
+            // check for video complete event
+            function onPlayerStateChange(event) {        
+                if(event.data === 0) {            
+                    nextVideo();
+                }
+            }
+        
+            // load the next video
+            function nextVideo(){
+                console.log('test');
+                alert('laod the next video bruh');
+            }
+        
+        </script>        
+        
+        
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -37,29 +103,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="#">Project name</a>
+                    <a class="brand" href="#">Clever name goes here</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
                         </ul>
                         <form class="navbar-form pull-right">
-                            <input class="span2" type="text" placeholder="Email">
-                            <input class="span2" type="password" placeholder="Password">
-                            <button type="submit" class="btn">Sign in</button>
+                            <ul class="nav">
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#">How It Works</a></li>
+                            </ul>
                         </form>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -67,37 +119,13 @@
         </div>
 
         <div class="container">
-
-            <!-- Main hero unit for a primary marketing message or call to action -->
-            <div class="hero-unit">
-                <h1>Hello, world!</h1>
-                <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-                <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-            </div>
-
-            <!-- Example row of columns -->
-            <div class="row">
-                <div class="span4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
-                </div>
-                <div class="span4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
-               </div>
-                <div class="span4">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
-                </div>
-            </div>
-
+            
+        <div id="player"></div>
+            
             <hr>
 
             <footer>
-                <p>&copy; Company 2012</p>
+                <p>&copy; name.... 2013</p>
             </footer>
 
         </div> <!-- /container -->
@@ -117,3 +145,4 @@
         </script>
     </body>
 </html>
+
