@@ -32,6 +32,7 @@
                 switch(e.which) {
                     case 37: // left
                         console.log('left pressed!');
+                        prevVideo();
                         break;
         
                     case 38: // up
@@ -53,12 +54,17 @@
             });
             
             // create youtube player
+            var playlist=['oRYaGpDUfYU','oWu9TFJjHaM','nKIu9yen5nc','V87VXA6gPuE'];
+            //var playlist=[{% for v in videos %}'{{ v }}',{% endfor %}];
+            var counter=0;
+
+            // create youtube player
             var player;
             function onYouTubePlayerAPIReady() {
                 player = new YT.Player('player', {
                   height: '390',
                   width: '640',
-                  videoId: 'oRYaGpDUfYU',
+                  videoId: playlist[0],
                   events: {
                     'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
@@ -80,8 +86,22 @@
         
             // load the next video
             function nextVideo(){
-                console.log('test');
-                alert('laod the next video bruh');
+                console.log('loading next video, exiting index ' + counter);
+                if (counter + 1 < playlist.length){
+                    counter++;
+                    player.stopVideo();
+                    player.loadVideoById(playlist[counter]);
+                }
+            }
+        
+            // load the previous video
+            function prevVideo(){
+                console.log('loading prev video, exiting index ' + counter);
+                if (counter > 0){
+                    counter--;
+                    player.stopVideo();
+                    player.loadVideoById(playlist[counter]);
+                }
             }
         
         </script>        
@@ -122,10 +142,11 @@
             
         <div id="player"></div>
             
-            <hr>
 
             <footer>
+                <!--
                 <p>&copy; name.... 2013</p>
+                -->
             </footer>
 
         </div> <!-- /container -->
