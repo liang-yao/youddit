@@ -1,8 +1,22 @@
 <html>
 <head> Welcom to Youddit </head>
 
-{% for v in videos %}
-    <li> <a href="{{ v }}">{{ v }}</a></li>
+<h3> Hot videos </h3>
+{% for v in data.hot.videos %}
+    <li> <a href="{{ v }}">{{ v.title }}</a></li>
 {% endfor %}
 
+<h3> Top videos </h3>
+{% for v in data.top.videos %}
+    <li> <a href="{{ v }}">{{ v.title }}</a></li>
+{% endfor %}
+
+<h3> Controversial videos </h3>
+{% for v in data.controversial.videos %}
+    <li> <a href="{{ v }}">{{ v.title }}</a></li>
+{% endfor %}
+
+<script type="text/javascript">
+    var data = {{ data|safe }};
+</script>
 </html>
