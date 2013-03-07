@@ -114,6 +114,10 @@ TEMPLATE_DIRS = (
     "app/templates"
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = {
+    'django.core.context_processors.static',
+}
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
