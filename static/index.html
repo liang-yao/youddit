@@ -27,9 +27,26 @@
         
 
         <script>
+            // create youtube player
+            var playlist=['oRYaGpDUfYU','oWu9TFJjHaM','nKIu9yen5nc','V87VXA6gPuE'];
+            //var playlist=[{% for v in videos %}'{{ v }}',{% endfor %}];
+            var counter=0;
+            var pauseFlag=0;
+
             // handle keyboard arrow key navigation
             $(document).keydown(function(e){
                 switch(e.which) {
+                    case 32: //space
+                        if(pauseFlag == 0){
+                            player.pauseVideo();
+                            pauseFlag=1;
+                        }
+                        else {
+                            player.playVideo();
+                            pauseFlag=0;
+                        }
+                        break;
+                    
                     case 37: // left
                         console.log('left pressed!');
                         prevVideo();
@@ -53,11 +70,6 @@
                 e.preventDefault();
             });
             
-            // create youtube player
-            var playlist=['oRYaGpDUfYU','oWu9TFJjHaM','nKIu9yen5nc','V87VXA6gPuE'];
-            //var playlist=[{% for v in videos %}'{{ v }}',{% endfor %}];
-            var counter=0;
-
             // create youtube player
             var player;
             function onYouTubePlayerAPIReady() {
