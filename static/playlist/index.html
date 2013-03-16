@@ -1,0 +1,87 @@
+<html>
+<head>
+
+	<title>Prototyping Horizontal Scrollbar</title>
+	
+	<style type="text/css">
+    #playlist {
+	    position: fixed;
+	    z-index: 100; 
+	    bottom: 0; 
+	    left: 0;
+	    width: 100%;
+	    background-image: url('botBar.png');
+	}
+
+	.playlistTitle {
+	    height: 100px;
+	    background-color: red;
+		font-family: Sans, sans-serif;
+	    color: #e8e8e8;
+	}
+	ul { 
+	    display: block;
+	    white-space: nowrap;
+	    overflow: auto;
+	    font-size: 0;
+    }
+	
+	li { 
+		width: 320px;
+		height: 120px;
+	    display: inline-block;
+	    font-size: 16;
+	    border-left: 3px solid #252525;
+    }
+    #active {
+    	background-image: url('active.png');
+    }
+	</style>
+
+
+</head>
+<body>
+    <h1>Prototyping Horizontal Scrollbar</h1>
+
+	<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+	<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+	
+	<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+	<div id='playlist'>
+		<ul>
+	    	<li><div class='playlistTitle'>MYO -Lorem Ipsum Dolor fdalskdf kfdasm Wearable Gesture Control from</div></li>
+	    	<a href='#'><li id ='active'>two</li></a>
+	    	<li>three</li>
+	    	<li>four</li>
+	    	<li>one</li>
+	    	<a href='#'><li>two</li></a>
+	    	<li>three</li>
+	    	<li>four</li>
+	    	<li>one</li>
+	    	<a href='#'><li>two</li></a>
+	    	<li>three</li>
+	    	<li>four</li>
+	    	<li>one</li>
+	    	<a href='#'><li>two</li></a>
+	    	<li>three</li>
+	    	<li>four</li>
+	    	<li>one</li>
+	    	<a href='#'><li>two</li></a>
+	    	<li>three</li>
+	    	<li>four</li>
+	    	<li>one</li>
+	    	<a href='#'><li>two</li></a>
+	    	<li>three</li>
+	    	<li>four</li>
+	    	<li>one</li>
+	    	<a href='#'><li>two</li></a>
+	    	<li>three</li>
+	    	<li>four</li>
+	    	
+		</ul>
+	</div>
+
+</body>
+</html> 
