@@ -1,88 +1,93 @@
-<html>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Thumbnail scroller jQuery plugin</title>
 
-	<title>Prototyping Horizontal Scrollbar</title>
-	
-	<style type="text/css">
-    #playlist {
-	    position: fixed;
-	    z-index: 100; 
-	    bottom: 0; 
-	    left: 0;
-	    width: 100%;
-	    background-image: url('botBar.png');
-	}
-
-	.playlistTitle {
-	    height: 100px;
-	    background-color: red;
-		font-family: Sans, sans-serif;
-	    color: #e8e8e8;
-	}
-	ul { 
-	    display: block;
-	    white-space: nowrap;
-	    overflow: auto;
-	    font-size: 0;
-    }
-	
-	li { 
-		width: 320px;
-		height: 120px;
-	    display: inline-block;
-	    font-size: 16;
-	    border-left: 3px solid #252525;
-    }
-    #active {
-    	background-image: url('active.png');
-    }
-	</style>
-
-
+<!-- thumbnail scroller stylesheet -->
+<link href="jquery.thumbnailScroller.css" rel="stylesheet" />
+<!-- jquery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<!-- jquery ui custom build (for animation easing) -->
+<script src="jquery-ui-1.8.13.custom.min.js"></script>
 </head>
 <body>
-    <h1>Prototyping Horizontal Scrollbar</h1>
+<!-- info -->
 
-	<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-
-	<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-	
-	<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-
-	<div id='playlist'>
-		<ul>
-	    	<li><div class='playlistTitle'>MYO -Lorem Ipsum Dolor fdalskdf kfdasm Wearable Gesture Control from</div></li>
-	    	<a href='#'><li id ='active'>two</li></a>
-	    	<li>three</li>
-	    	<li>four</li>
-	    	<li>one</li>
-	    	<a href='#'><li>two</li></a>
-	    	<li>three</li>
-	    	<li>four</li>
-	    	<li>one</li>
-	    	<a href='#'><li>two</li></a>
-	    	<li>three</li>
-	    	<li>four</li>
-	    	<li>one</li>
-	    	<a href='#'><li>two</li></a>
-	    	<li>three</li>
-	    	<li>four</li>
-	    	<li>one</li>
-	    	<a href='#'><li>two</li></a>
-	    	<li>three</li>
-	    	<li>four</li>
-	    	<li>one</li>
-	    	<a href='#'><li>two</li></a>
-	    	<li>three</li>
-	    	<li>four</li>
-	    	<li>one</li>
-	    	<a href='#'><li>two</li></a>
-	    	<li>three</li>
-	    	<li>four</li>
-	    	
-		</ul>
+<!-- thumbnail scroller markup begin -->
+<div id="tS2" class="jThumbnailScroller">
+	<div class="jTscrollerContainer">
+		<div class="jTscroller">
+			<a href="#"><div id="tesfd"><img src="thumbs/img1.jpg" /></div></a>
+			<a href="#"><img src="thumbs/img2.jpg" /></a>
+			<a href="#"><img src="thumbs/img3.jpg" /></a>
+			<a href="#"><img src="thumbs/img4.jpg" /></a>
+			<a href="#"><img src="thumbs/img5.jpg" /></a>
+			<a href="#"><img src="thumbs/img6.jpg" /></a>
+			<a href="#"><img src="thumbs/img7.jpg" /></a>
+			<a href="#"><img src="thumbs/img8.jpg" /></a>
+			<a href="#"><img src="thumbs/img9.jpg" /></a>
+			<a href="#"><img src="thumbs/img10.jpg" /></a>
+			<a href="#"><img src="thumbs/img11.jpg" /></a>
+			<a href="#"><img src="thumbs/img12.jpg" />12</a>
+			<a href="#"><img src="thumbs/img13.jpg" /></a>
+			<a href="#"><img src="thumbs/img14.jpg" /></a>
+			<a href="#"><img src="thumbs/img15.jpg" /></a>
+			<a href="#"><img src="thumbs/img16.jpg" /></a>
+			<a href="#"><img src="thumbs/img17.jpg" /></a>
+			<a href="#"><img src="thumbs/img18.jpg" />18</a>
+			<a href="#"><img src="thumbs/img19.jpg" />19</a>
+			<a href="#"><img src="thumbs/img20.jpg" />20</a>
+						<a href="#"><img src="thumbs/img10.jpg" /></a>
+			<a href="#"><img src="thumbs/img11.jpg" /></a>
+			<a href="#"><img src="thumbs/img12.jpg" />12</a>
+			<a href="#"><img src="thumbs/img13.jpg" /></a>
+			<a href="#"><img src="thumbs/img14.jpg" /></a>
+			<a href="#"><img src="thumbs/img15.jpg" /></a>
+			<a href="#"><img src="thumbs/img16.jpg" /></a>
+						<a href="#"><img src="thumbs/img10.jpg" /></a>
+			<a href="#"><img src="thumbs/img11.jpg" /></a>
+			<a href="#"><img src="thumbs/img12.jpg" />12</a>
+			<a href="#"><img src="thumbs/img13.jpg" /></a>
+			<a href="#"><img src="thumbs/img14.jpg" /></a>
+			<a href="#"><img src="thumbs/img15.jpg" /></a>
+			<a href="#"><img src="thumbs/img16.jpg" /></a>
+		</div>
 	</div>
+	<a href="#" class="jTscrollerPrevButton"></a>
+	<a href="#" class="jTscrollerNextButton"></a>
+</div>
+<!-- thumbnail scroller markup end -->
+<script src="jquery.thumbnailScroller.js"></script>
+<script src='mousewheel.js' type='text/javascript'>    </script>
 
+
+<script>
+/* jQuery.noConflict() for using the plugin along with other libraries. 
+   You can remove it if you won't use other libraries (e.g. prototype, scriptaculous etc.) or 
+   if you include jQuery before other libraries in yourdocument's head tag. 
+   [more info: http://docs.jquery.com/Using_jQuery_with_Other_Libraries] */
+jQuery.noConflict(); 
+/* calling thumbnailScroller function with options as parameters */
+(function($){
+window.onload=function(){ 
+	$("#tS2").thumbnailScroller({ 
+		scrollerType:"clickButtons", 
+		scrollerOrientation:"horizontal", 
+		scrollSpeed:2, 
+		scrollEasing:"easeOutCirc", 
+		scrollEasingAmount:600, 
+		acceleration:4, 
+		scrollSpeed:800, 
+		noScrollCenterSpace:10, 
+		autoScrolling:0, 
+		autoScrollingSpeed:2000, 
+		autoScrollingEasing:"easeInOutQuad", 
+		autoScrollingDelay:500 
+	});
+	
+}
+})(jQuery);
+</script>
 </body>
-</html> 
+</html>
