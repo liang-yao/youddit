@@ -9,17 +9,18 @@ Subreddits:
     {
         "name":
         "updated_at":
-        "cat": category [0, 1, 2]
-        "vids": [] ids of videos 
+        "ver": version - Incremented each time the data is updated
     }
 
-    Index: { name: 1, cat: 1}
+    Index: { name: 1 } 
 
 Videos:
     
     {
-        "_id": reddit id
+        "rid": reddit id
         "subreddit":
+        "cat": category
+        "ver": version
         "vid": video id
         "provider": 
         "score":
@@ -28,7 +29,7 @@ Videos:
         "created":
     }
 
-    Index: {subreddit, category}
+    Index: {subreddit: 1, category: 1, ver: -1}
 """
 
 
@@ -37,8 +38,8 @@ def create():
     db = conn.Youddit
     subreddits = db.subreddits
     videos = db.videos
-    videos.create_index([ ("subreddit", 1) ])
-    subreddits.create_index([ ("name", 1), ("cat", 1 ) ])
+    videos.create_index([ ("subreddit", 1), ("cat", 1), ("ver", -1) ])
+    subreddits.create_index([("name", 1)])
        
 def destroy():
     conn = MongoClient()

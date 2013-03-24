@@ -10,9 +10,9 @@ def index(request):
     db = conn.Youddit
     vids = {}
     reddit = "videos"
-    vids = db.subreddits.find_one({"name": reddit, "cat": videos.CATEGORIES['top']}, fields={"vids": { '$slice': [0, 25]}})
+    ver = db.subreddits.find_one({"name": reddit})['ver'] 
     v = []
-    for i in db.videos.find({ "_id": { "$in": vids['vids'] }}):
+    for i in db.videos.find({ "subreddit": reddit, "cat": videos.CATEGORIES['top'], "ver": ver }).limit(25):
         del i["_id"]
         v.append(i)
     template = loader.get_template('index.html')

@@ -28,7 +28,7 @@ def get_videos(subreddit, category, **kwargs):
                     continue
 
                 # appending the video data to the videos list
-                videos.append({ "_id": r['id'], # Reddit id
+                videos.append({ "rid": r['id'], # Reddit id
                                 "title": r['title'],
                                 "provider": provider, 
                                 "vid": vid, 
@@ -50,8 +50,14 @@ def request(url, params):
     request = urllib2.Request(url + '?' + params)
     request.add_header('User-Agent', 'reddit video stream youddit')
     request.add_header('Content-Type', 'application/json')
-    
-    response = urllib2.urlopen(request)
+   
+    try:
+        response = urllib2.urlopen(request)
+    except Exception as e:
+        print e
+        time.sleep(5)
+        return request(url, params)
+        
     response = json.loads(response.read())
     return response
   
@@ -73,27 +79,33 @@ def _get_thumbnail(data):
     else:
         return ''
 
-# Update the main reddits
+# Update the cool reddits
 # This should be called in a cron job
 def update():
     conn = MongoClient()
     db = conn.Youddit
 
     for r in COOL_REDDITS:
+        reddit = db.subreddits.find_one({"name": r})
+        if reddit:
+            ver = reddit['ver']
+        else:
+            ver = 0
+        ver += 1
         for cat in CATEGORIES:
             print cat
             videos = get_videos(r, cat, pages=30)
-            vids = [ v["_id"] for v in videos ]
-            try:
-                db.videos.insert(videos, continue_on_error=True)
-            except:
-                pass
-            db.subreddits.update({ "name": r, "cat": CATEGORIES[cat] }, 
-                                 { "name": r, 
-                                   "updated_at": time.time(),
-                                   "cat": CATEGORIES[cat],
-                                   "vids": vids
-                                 }, True )
+            # Add version and category to each video in list
+            videos = [ merge(v, {"ver": ver, "cat": CATEGORIES[cat]}) for v in videos ]
+            print videos
+            db.videos.insert(videos)
+            db.subreddits.update({ "name": r }, { "name": r,
+                                                  "updated_at": time.time(),
+                                                  "ver": ver
+                                                }, True )
+def merge(d1, d2):
+    d1.update(d2)
+    return d1
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
