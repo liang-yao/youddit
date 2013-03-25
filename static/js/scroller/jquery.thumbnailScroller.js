@@ -120,8 +120,77 @@ Homepage: manos.malihu.gr/jquery-thumbnail-scroller
 				});
 			});
 		}
-		
-		
+
+
+        //function for mouse scrolling
+        $('div.jThumbnailScroller')
+            .mousewheel(function(event, delta, deltaX, deltaY) {
+                var o = '';
+
+                if (Math.abs(deltaX) > Math.abs(deltaY)){
+                    if (deltaX > 0)
+                        o = o + ', east ('+deltaX+')';
+                    else if (deltaX < 0)
+                        o = o + ', west ('+deltaX+')';
+                }
+                else {
+                    if (deltaY > 0)
+                        o = o + ', north ('+deltaY+')';
+                    else if (deltaY < 0)
+                        o = o + ', south ('+deltaY+')';
+                }
+
+                if( o != '' )
+                    //console.log( o );
+                    // ########################## begin splice
+                    $scrollerPrevButton.show();
+                    $scrollerNextButton.show();
+                    
+                    
+                    // ############## up scroll
+                    if (delta < 0){
+                        
+                        var posX=$scroller.position().left;
+                        var diffX=totalWidth+(posX-$this.width());
+                        //var diffX=200;
+                        var posY=$scroller.position().top;
+                        var diffY=totalHeight+(posY-$this.height());
+        
+                        if(diffX>=200){
+                            //$scroller.stop().animate({left:"-="+$this.width()},options.scrollSpeed,options.scrollEasing,function(){
+                            $scroller.stop().animate({left:"-="+200},options.scrollSpeed,options.scrollEasing,function(){
+                            });
+                        } else {
+                            //$scroller.stop().animate({left:$this.width()-totalWidth},options.scrollSpeed,options.scrollEasing);
+                            // left: [limit]
+                            $scroller.stop().animate({left:$this.width()-totalWidth},options.scrollSpeed,options.scrollEasing);
+                        }
+                        
+                    }
+                    // ############## down scroll
+                    else if (delta > 0){
+                        
+                        var posX=$scroller.position().left;
+                        //var diffX=totalWidth+(posX-$this.width());
+                        var diffX=200;
+                        var posY=$scroller.position().top;
+                        var diffY=totalHeight+(posY-$this.height());
+        
+                        if(posX+200<=0){
+                            //$scroller.stop().animate({left:"+="+$this.width()},options.scrollSpeed,options.scrollEasing,function(){
+                            $scroller.stop().animate({left:"+="+200},options.scrollSpeed,options.scrollEasing,function(){
+                            });
+                        } else {
+                            $scroller.stop().animate({left:0},options.scrollSpeed,options.scrollEasing);
+                        }
+                        
+                    }
+                    
+                return false; // prevent default
+            });
+
+
+/*
 		//function for mouse scrolling
 		jQuery(function($) {
 		    $('div.jThumbnailScroller')
@@ -178,6 +247,8 @@ Homepage: manos.malihu.gr/jquery-thumbnail-scroller
 		            return false;
 		        });
 		});
+		
+*/		
 		
 		//click scrolling fn
 		function ClickScrolling(){
