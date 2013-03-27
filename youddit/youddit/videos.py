@@ -97,7 +97,6 @@ def update():
             videos = get_videos(r, cat, pages=30)
             # Add version and category to each video in list
             videos = [ merge(v, {"ver": ver, "cat": CATEGORIES[cat]}) for v in videos ]
-            print videos
             db.videos.insert(videos)
             db.subreddits.update({ "name": r }, { "name": r,
                                                   "updated_at": time.time(),
