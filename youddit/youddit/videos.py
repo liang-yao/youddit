@@ -102,6 +102,21 @@ def update():
                                                   "updated_at": time.time(),
                                                   "ver": ver
                                                 }, True )
+    conn.close()
+
+def clean_up():
+    conn = MongoClient()
+    db = conn.Youddit
+    for r in COOL_REDDITS:
+        reddit = db.subreddits.find_one({"name": r})
+        print r
+        print reddit
+        print reddit['ver']
+        if not reddit:
+            continue
+        db.videos.remove({"subreddit": reddit['name'], "ver": { "$lt": reddit['ver'] }}) 
+    conn.close()
+
 def merge(d1, d2):
     d1.update(d2)
     return d1
@@ -110,6 +125,7 @@ if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'update':
         update()
+        clean_up()
         print 'Done'
 
 
