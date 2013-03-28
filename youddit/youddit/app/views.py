@@ -12,8 +12,7 @@ def index(request):
     reddit = "videos"
     ver = db.subreddits.find_one({"name": reddit})['ver'] 
     v = []
-    for i in db.videos.find({ "subreddit": reddit, "cat": videos.CATEGORIES['top'], "ver": ver }).limit(25):
-        del i["_id"]
+    for i in db.videos.find({ "subreddit": reddit, "cat": videos.CATEGORIES['top'], "ver": ver }, {'_id': 0}).sort('pos', 1).limit(25):
         v.append(i)
     template = loader.get_template('index.html')
     context = RequestContext(request, { "data": json.dumps(v) })

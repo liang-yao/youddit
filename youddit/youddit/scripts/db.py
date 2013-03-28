@@ -27,6 +27,7 @@ Videos:
         "permalink":
         "title":
         "created":
+        "pos": position
     }
 
     Index: {subreddit: 1, category: 1, ver: -1}
@@ -38,7 +39,7 @@ def create():
     db = conn.Youddit
     subreddits = db.subreddits
     videos = db.videos
-    videos.create_index([ ("subreddit", 1), ("cat", 1), ("ver", -1) ])
+    videos.create_index([ ("subreddit", 1), ("cat", 1), ("ver", -1), ("pos", 1) ])
     subreddits.create_index([("name", 1)])
        
 def destroy():

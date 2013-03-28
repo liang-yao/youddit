@@ -14,6 +14,7 @@ def get_videos(subreddit, category, **kwargs):
     videos = []
 
     after = ''
+    position = 0
     for page in range(0, pages):
         response = request(url, {'limit':100, 'after': after})
         if len(response['data']['children']) == 0:
@@ -26,7 +27,7 @@ def get_videos(subreddit, category, **kwargs):
                 # Some videos dont have proper links, so we skip them
                 if vid == '':
                     continue
-
+                position += 1
                 # appending the video data to the videos list
                 videos.append({ "rid": r['id'], # Reddit id
                                 "title": r['title'],
@@ -36,6 +37,7 @@ def get_videos(subreddit, category, **kwargs):
                                 "score": r['score'],
                                 "permalink": r['permalink'],
                                 "created": r['created'],
+                                "pos": position
                               })
 
         after = response['data']['after']
