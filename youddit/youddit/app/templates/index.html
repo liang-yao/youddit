@@ -174,12 +174,11 @@
             function keepFocused() {
                 window.focus();
             }
-            if (window.chrome || /Safari/.test(navigator.userAgent)) {
+            if (window.chrome) { 
                 setInterval(keepFocused, 2000);
             }
 
             // create youtube player
-            // var playlist=['oRYaGpDUfYU','oWu9TFJjHaM','nKIu9yen5nc','V87VXA6gPuE'];
             var data = {{ data|safe }}  ; 
             var counter=0;
             

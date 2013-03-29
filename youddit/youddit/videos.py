@@ -1,7 +1,7 @@
 import urllib2, urllib, urlparse, simplejson as json, time, re, sys
 from pymongo import MongoClient
 
-PROVIDERS = { "youtube.com": 1, "vimeo.com": 2 }
+PROVIDERS = { "youtube.com": 1, "youtu.be": 2, "vimeo.com": 3 }
 CATEGORIES = { "top": 0, "hot": 1, "controversial": 2 }
 # List of subreddits we update per hour
 COOL_REDDITS = ["videos"]
@@ -71,7 +71,7 @@ def _get_vid(provider, url):
             return urlparse.parse_qs(u.query)['v'][0]
         except KeyError:
             return ''
-    elif provider == PROVIDERS['vimeo.com']:
+    elif provider == PROVIDERS['youtu.be'] or provider == PROVIDERS['vimeo.com']:
         return u.path[1:]
 
 # Return the thumbnail url if its there
@@ -112,8 +112,6 @@ def clean_up():
     for r in COOL_REDDITS:
         reddit = db.subreddits.find_one({"name": r})
         print r
-        print reddit
-        print reddit['ver']
         if not reddit:
             continue
         db.videos.remove({"subreddit": reddit['name'], "ver": { "$lt": reddit['ver'] }}) 
