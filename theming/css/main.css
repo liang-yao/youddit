@@ -1,0 +1,90 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+  
+body {
+    background-image:url('../img/background.png');
+    background-size:100%;
+    background-color:#1b1b1b;
+}
+
+.vidName {
+    color: #fff;
+    background-color:rgba(26,26,26,0.4);
+    display: inline;
+    font-size: 28px;
+    font-family: 'Raleway', serif;
+    line-height: 1.357;
+    box-shadow:10px 0 0 rgba(26,26,26,0.4), -10px 0 0 rgba(26,26,26,0.4);
+    padding: 2px 0;
+    margin:0;
+}
+
+.navbar {
+    width: 1170px;
+    position: fixed;
+    top: 0;
+}
+
+.navbar-inner {
+    background-color:rgba(26,26,26,0.4);
+    background-image: none;
+    background-repeat: no-repeat;
+    filter: none;
+    border: none;
+    
+    color: #fff;
+    font-family: 'Raleway', serif;
+    line-height: 1.357;
+
+  -webkit-box-shadow: 0 1px 10px black;
+     -moz-box-shadow: 0 1px 10px black;
+          box-shadow: 0 1px 10px black;
+
+          
+  -webkit-border-radius: 0 0 4px 3px;
+     -moz-border-radius: 0 0 4px 3px;
+          border-radius: 0 0 4px 3px;
+
+}
+
+#tS2 {
+    position: fixed;
+    z-index: 100; 
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+    background-color: rgba(26,26,26,0.4);
+
+  -webkit-box-shadow: 0 1px 10px black;
+     -moz-box-shadow: 0 1px 10px black;
+          box-shadow: 0 1px 10px black;
+}
+
+#player {
+    max-width: 640px;
+}
+
+#vidTitle {
+    width:468px;
+    padding-left:32px;
+}
+
+#mainRow {
+    position: absolute; top:15%;
+}
+
+
+.thumbTitle {
+    font-family: 'Raleway', serif;
+    position:relative;
+    top:-128px;
+    left: 10px;
+    width:222px;
+}
+
+a.darken:hover {
+    color: #fff;
+}
