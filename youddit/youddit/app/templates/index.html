@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.thumbnailScroller.css">
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,500' rel='stylesheet' type='text/css'>
 
    </head>
     <body>
@@ -28,25 +29,46 @@
         <![endif]-->
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
+        <div class="container">
+            <div class="navbar">
+                <div class="navbar-inner">
+                <!-- <div class="container"> -->
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="#">Clever name goes here</a>
+                    <a class="brand" href="#">Youddit</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
+                            
+
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">How it Works<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    Info about specifying stream url, arrow keys navigation
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Popular Streams<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    List of popular streams go here:
+                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Feedback<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">Email</li>
+                                    <li class="divider"></li>
+                                    <li class="nav-header">Feedback</li>
+                                </ul>
+                            </li>
                         </ul>
-                        <form class="navbar-form pull-right">
-                            <ul class="nav">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li><a href="#">How It Works</a></li>
-                            </ul>
-                        </form>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
@@ -54,42 +76,55 @@
 
         <div class="container">
             
-        <div id="player"></div>
-        
-        
-		<div id="tS2" class="jThumbnailScroller">
-			<div class="jTscrollerContainer">
-				<div class="jTscroller">
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/1.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/2.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/3.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/1.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/2.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/3.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/1.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/2.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/3.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/1.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/2.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/3.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/1.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/2.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/3.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/1.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/2.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/3.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/1.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/2.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/3.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/1.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/2.jpg" /></a>
-                    <a href="#"><img src="http://img.youtube.com/vi/34WIbmXkewU/3.jpg" /></a>
-
-				</div>
-			</div>
-			<a href="#" class="jTscrollerPrevButton"></a>
-			<a href="#" class="jTscrollerNextButton"></a>
-		</div>
+            <div class="row" id="mainRow">
+                <div class="span7" id="player"></div>
+                <!-- <div id="infoRight"> -->
+                <div class="span4" id="vidTitle">
+                    <div class='vidName'>$149 armband called MYO that detects motion and muscle movements to allow control of a Mac, PC, or other device using gestures.</div>
+                </div> 
+            </div>
+            
+            <div id="tS2" class="jThumbnailScroller">
+                
+                <div class="row">
+                    <div class = "span 4 offset4">       
+                        <form class="navbar-form">
+                            Stream:  <input type="text" class="search-query" placeholder="videos">
+                        </form>
+                    </div>
+                    <div class = "span 4">
+                        <a href = "#">Previous</a>
+                        <a href = "#">Next</a>
+                    </div>
+                </div>
+                
+                <div class="jTscrollerContainer">
+                    <div class="jTscroller">
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oWu9TFJjHaM/mqdefault.jpg" /><div class="thumbTitle">$149 armband called MYO that detects motion and muscle movements to allow control of a Mac, PC, or other device using gestures.</div></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" /><div class="thumbTitle">I believe i just got rick rolled by Google staff</div></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oRYaGpDUfYU/mqdefault.jpg" /><div class="thumbTitle">Takes the Harlem Shake cake</div></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/Kp8fYMpQqNM/mqdefault.jpg" /><div class="thumbTitle">Cooking Lesson: Wild Boar Stew in Florence, Italy</div></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/pg0wRK9B0ig/mqdefault.jpg" /><div class="thumbTitle">Gordon Ramsay catches Kitchen Thief - Kitchen Nightmares - [1:33]</div></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/RhNTDUdcEIU/mqdefault.jpg" /><div class="thumbTitle">Gillian Jacobs talks about Britta, Troy, and Ham Costume</div></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/MiBdNb-vpG0/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/0XmbwpfeBi4/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oWu9TFJjHaM/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oRYaGpDUfYU/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/Kp8fYMpQqNM/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/pg0wRK9B0ig/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/RhNTDUdcEIU/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/MiBdNb-vpG0/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/RhNTDUdcEIU/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/0XmbwpfeBi4/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/0XmbwpfeBi4/mqdefault.jpg" /></a>
+                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oWu9TFJjHaM/mqdefault.jpg" />last?</a>
+    
+                    </div>
+                </div>
+                <a href="#" class="jTscrollerPrevButton"></a>
+                <a href="#" class="jTscrollerNextButton"></a>
+            </div>
 
 
             <footer>
