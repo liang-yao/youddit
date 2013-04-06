@@ -230,7 +230,8 @@
                   videoId: data[0]['vid'], 
                   events: {
                     'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
+                    'onStateChange': onPlayerStateChange,
+                    'onError' : onPlayerError
                   }
                 });
 
@@ -243,10 +244,16 @@
             }
         
             // check for video complete event
-            function onPlayerStateChange(event) {        
-                if(event.data === 0) {            
+            function onPlayerStateChange(event) {
+                if(event.data === 0) {
                     nextVideo();
                 }
+            }
+            
+            // check for video error
+            function onPlayerError(event) {
+                console.log("Player error, skipping video");
+                nextVideo();
             }
         
             // load the next video
