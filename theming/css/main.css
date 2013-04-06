@@ -10,7 +10,7 @@ body {
     background-color:#1b1b1b;
 }
 
-.vidName {
+#title {
     color: #fff;
     background-color:rgba(26,26,26,0.4);
     display: inline;
