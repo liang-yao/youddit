@@ -22,6 +22,11 @@ def get_videos(subreddit, category, **kwargs):
         for reddit in response['data']['children']:
             if reddit['data']['domain'] in PROVIDERS:
                 provider = PROVIDERS[reddit['data']['domain']] 
+                
+                # Remove vimeo for this version
+                if provider == PROVIDERS["vimeo.com"]:
+                    continue
+
                 r = reddit['data']
                 vid = _get_vid(provider, r['url'])
                 # Some videos dont have proper links, so we skip them
