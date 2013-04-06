@@ -6,6 +6,10 @@ CATEGORIES = { "top": 0, "hot": 1, "controversial": 2 }
 # List of subreddits we update per hour
 COOL_REDDITS = ["videos"]
 
+# Mongo
+conn = MongoClient()
+db = conn.Youddit
+
 def get_videos(subreddit, category, **kwargs):
     url = "http://www.reddit.com/r/%s/%s.json"%(subreddit, category)
     pages = 30
@@ -54,12 +58,12 @@ def get_videos(subreddit, category, **kwargs):
 
 def request(url, params):
     params = urllib.urlencode(params)
-    request = urllib2.Request(url + '?' + params)
-    request.add_header('User-Agent', 'reddit video stream youddit')
-    request.add_header('Content-Type', 'application/json')
+    req = urllib2.Request(url + '?' + params)
+    req.add_header('User-Agent', 'reddit video stream youddit')
+    req.add_header('Content-Type', 'application/json')
    
     try:
-        response = urllib2.urlopen(request)
+        response = urllib2.urlopen(req)
     except Exception as e:
         print e
         time.sleep(5)
@@ -86,30 +90,29 @@ def _get_thumbnail(data):
     else:
         return ''
 
+def load_videos(r):
+    print "Subreddit: ", r
+    reddit = db.subreddits.find_one({"name": r})
+    if reddit:
+        ver = reddit['ver']
+    else:
+        ver = 0
+    ver += 1
+    for cat in CATEGORIES:
+        print cat
+        videos = get_videos(r, cat, pages=30)
+        # Add version and category to each video in list
+        videos = [ merge(v, {"ver": ver, "cat": CATEGORIES[cat]}) for v in videos ]
+        db.videos.insert(videos)
+        db.subreddits.update({ "name": r }, { "name": r,
+                                              "updated_at": time.time(),
+                                              "ver": ver
+                                            }, True )
 # Update the cool reddits
 # This should be called in a cron job
 def update():
-    conn = MongoClient()
-    db = conn.Youddit
-
     for r in COOL_REDDITS:
-        reddit = db.subreddits.find_one({"name": r})
-        if reddit:
-            ver = reddit['ver']
-        else:
-            ver = 0
-        ver += 1
-        for cat in CATEGORIES:
-            print cat
-            videos = get_videos(r, cat, pages=30)
-            # Add version and category to each video in list
-            videos = [ merge(v, {"ver": ver, "cat": CATEGORIES[cat]}) for v in videos ]
-            db.videos.insert(videos)
-            db.subreddits.update({ "name": r }, { "name": r,
-                                                  "updated_at": time.time(),
-                                                  "ver": ver
-                                                }, True )
-    conn.close()
+        load_videos(r)
 
 def clean_up():
     conn = MongoClient()
