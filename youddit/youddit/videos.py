@@ -98,6 +98,7 @@ def load_videos(r):
     else:
         ver = 0
     ver += 1
+    videos = []
     for cat in CATEGORIES:
         print cat
         videos = get_videos(r, cat, pages=30)
@@ -108,6 +109,8 @@ def load_videos(r):
                                               "updated_at": time.time(),
                                               "ver": ver
                                             }, True )
+    return videos
+
 # Update the cool reddits
 # This should be called in a cron job
 def update():
