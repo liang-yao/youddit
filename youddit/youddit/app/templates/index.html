@@ -239,7 +239,7 @@
             function onPlayerReady(event) {
                 event.target.playVideo();
                 $(".darken").click(function (e) { 
-                    counter = $(this).attr('data-id');
+                    counter = parseInt($(this).attr('data-id'));
                     console.log(counter);
                     player.stopVideo();
                     player.loadVideoById(videos[counter]['vid']);
