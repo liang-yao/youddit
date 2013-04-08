@@ -135,6 +135,11 @@
 
         </div> <!-- /container -->
         
+        <script type='text/template' id='playlist_template'>
+            <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oWu9TFJjHaM/mqdefault.jpg" /><div class="thumbTitle"></div></a>
+        </script>
+
+
         <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="http://www.youtube.com/player_api"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -149,36 +154,42 @@
 		<script src='{{ STATIC_URL }}js/scroller/jquery.mousewheel.js' type='text/javascript'></script>
 		<!-- jquery ui custom build (for animation easing) -->
 		<script src="{{ STATIC_URL }}js/scroller/jquery-ui-1.8.13.custom.min.js"></script>
-		<script>
-		/* jQuery.noConflict() for using the plugin along with other libraries. 
-		   You can remove it if you won't use other libraries (e.g. prototype, scriptaculous etc.) or 
-		   if you include jQuery before other libraries in yourdocument's head tag. 
-		   [more info: http://docs.jquery.com/Using_jQuery_with_Other_Libraries] */
-		//jQuery.noConflict(); 
-		/* calling thumbnailScroller function with options as parameters */
-		(function($){
-		window.onload=function(){ 
-			$("#tS2").thumbnailScroller({ 
-				scrollerType:"clickButtons", 
-				scrollerOrientation:"horizontal", 
-				scrollSpeed:2, 
-				scrollEasing:"easeOutCirc", 
-				scrollEasingAmount:600, 
-				acceleration:4, 
-				scrollSpeed:800, 
-				noScrollCenterSpace:10, 
-				autoScrolling:0, 
-				autoScrollingSpeed:2000, 
-				autoScrollingEasing:"easeInOutQuad", 
-				autoScrollingDelay:500 
-			});
-			
-		}
-		})(jQuery);
-		</script>
+		<script src="{{ STATIC_URL }}js/underscore-min.js"></script>
 
-        
-        <script>
+		<script>
+            var data = {{ data|safe }}; 
+            var counter = 0;
+            
+            function load_videos() {
+                var template = $('#playlist_template').contents();
+                console.log(template);
+                for (i in data['videos']) {
+
+                }
+            }
+
+            (function($){
+            window.onload=function(){
+                load_videos();
+
+                $("#tS2").thumbnailScroller({ 
+                    scrollerType:"clickButtons", 
+                    scrollerOrientation:"horizontal", 
+                    scrollSpeed:2, 
+                    scrollEasing:"easeOutCirc", 
+                    scrollEasingAmount:600, 
+                    acceleration:4, 
+                    scrollSpeed:800, 
+                    noScrollCenterSpace:10, 
+                    autoScrolling:0, 
+                    autoScrollingSpeed:2000, 
+                    autoScrollingEasing:"easeInOutQuad", 
+                    autoScrollingDelay:500 
+                });
+                
+            }
+            })(jQuery);
+
             // handle keyboard arrow key navigation
             $(document).keydown(function(e){
                 switch(e.which) {
@@ -212,10 +223,6 @@
             if (window.chrome) { 
                 setInterval(keepFocused, 2000);
             }
-
-            // create youtube player
-            var data = {{ data|safe }}  ; 
-            var counter=0;
             
             function get_video(provider, position) {
                 return data[position];
