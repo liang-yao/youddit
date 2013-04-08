@@ -252,7 +252,7 @@ Homepage: manos.malihu.gr/jquery-thumbnail-scroller
 		
 		//click scrolling fn
 		function ClickScrolling(){
-			$scrollerPrevButton.hide();
+			//$scrollerPrevButton.hide();
 			$scrollerNextButton.show();
 			$scrollerNextButton.click(function(e){ //next button
 				e.preventDefault();
@@ -265,11 +265,11 @@ Homepage: manos.malihu.gr/jquery-thumbnail-scroller
 				if(diffX>=$this.width()){
 					$scroller.stop().animate({left:"-="+$this.width()},options.scrollSpeed,options.scrollEasing,function(){
 						if(diffX==$this.width()){
-							$scrollerNextButton.stop().hide("fast");
+							//$scrollerNextButton.stop().hide("fast");
 						}
 					});
 				} else {
-					$scrollerNextButton.stop().hide("fast");
+					//$scrollerNextButton.stop().hide("fast");
 					$scroller.stop().animate({left:$this.width()-totalWidth},options.scrollSpeed,options.scrollEasing);
 				}
 				
@@ -285,11 +285,11 @@ Homepage: manos.malihu.gr/jquery-thumbnail-scroller
 				if(posX+$this.width()<=0){
 					$scroller.stop().animate({left:"+="+$this.width()},options.scrollSpeed,options.scrollEasing,function(){
 						if(posX+$this.width()==0){
-							$scrollerPrevButton.stop().hide("fast");
+							//$scrollerPrevButton.stop().hide("fast");
 						}
 					});
 				} else {
-					$scrollerPrevButton.stop().hide("fast");
+					//$scrollerPrevButton.stop().hide("fast");
 					$scroller.stop().animate({left:0},options.scrollSpeed,options.scrollEasing);
 				}
 				
