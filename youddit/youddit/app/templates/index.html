@@ -117,7 +117,7 @@
         </div> <!-- /container -->
         
         <script type='text/template' id='playlist_template'>
-            <a href="#" class="darken"><img src="http://img.youtube.com/vi/<%= vid %>/mqdefault.jpg"/><div data-id=<%= id %> class="thumbTitle"><%= title %></div></a>
+            <a href="#" data-id=<%= id %> class="darken"><img src="http://img.youtube.com/vi/<%= vid %>/mqdefault.jpg"/><div data-id=<%= id %> class="thumbTitle"><%= title %></div></a>
         </script>
 
 
@@ -234,13 +234,12 @@
 
                 $('#title').html(videos[0]['title']);
             }
-        
+            
             // autoplay video
             function onPlayerReady(event) {
                 event.target.playVideo();
-                $(".thumbTitle").click(function (e) { 
-                    console.log("  CLICKED")
-                    counter = e.target.dataset.id;
+                $(".darken").click(function (e) { 
+                    counter = $(this).attr('data-id');
                     console.log(counter);
                     player.stopVideo();
                     player.loadVideoById(videos[counter]['vid']);
