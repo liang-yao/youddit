@@ -100,25 +100,6 @@
                 
                 <div class="jTscrollerContainer">
                     <div class="jTscroller">
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oWu9TFJjHaM/mqdefault.jpg" /><div class="thumbTitle">$149 armband called MYO that detects motion and muscle movements to allow control of a Mac, PC, or other device using gestures.</div></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" /><div class="thumbTitle">I believe i just got rick rolled by Google staff</div></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oRYaGpDUfYU/mqdefault.jpg" /><div class="thumbTitle">Takes the Harlem Shake cake</div></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/Kp8fYMpQqNM/mqdefault.jpg" /><div class="thumbTitle">Cooking Lesson: Wild Boar Stew in Florence, Italy</div></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/pg0wRK9B0ig/mqdefault.jpg" /><div class="thumbTitle">Gordon Ramsay catches Kitchen Thief - Kitchen Nightmares - [1:33]</div></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/RhNTDUdcEIU/mqdefault.jpg" /><div class="thumbTitle">Gillian Jacobs talks about Britta, Troy, and Ham Costume</div></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/MiBdNb-vpG0/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/0XmbwpfeBi4/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oWu9TFJjHaM/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oRYaGpDUfYU/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/Kp8fYMpQqNM/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/pg0wRK9B0ig/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/RhNTDUdcEIU/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/MiBdNb-vpG0/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/RhNTDUdcEIU/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/0XmbwpfeBi4/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/0XmbwpfeBi4/mqdefault.jpg" /></a>
-                        <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oWu9TFJjHaM/mqdefault.jpg" />last?</a>
     
                     </div>
                 </div>
@@ -136,7 +117,7 @@
         </div> <!-- /container -->
         
         <script type='text/template' id='playlist_template'>
-            <a href="#" class = "darken"><img src="http://img.youtube.com/vi/oWu9TFJjHaM/mqdefault.jpg" /><div class="thumbTitle"></div></a>
+            <a href="#" class="darken"><img src="http://img.youtube.com/vi/<%= vid %>/mqdefault.jpg"/><div data-id=<%= id %> class="thumbTitle"><%= title %></div></a>
         </script>
 
 
@@ -158,13 +139,15 @@
 
 		<script>
             var data = {{ data|safe }}; 
+            var videos = data['videos'];
             var counter = 0;
             
             function load_videos() {
-                var template = $('#playlist_template').contents();
-                console.log(template);
-                for (i in data['videos']) {
-
+                var compiled = _.template($('#playlist_template').html()),
+                    video;
+                for (i in videos) {
+                    video = videos[i];
+                    $('.jTscroller').append(compiled({ id: i, vid: video['vid'], title: video['title'] }))
                 }
             }
 
@@ -186,7 +169,6 @@
                     autoScrollingEasing:"easeInOutQuad", 
                     autoScrollingDelay:500 
                 });
-                
             }
             })(jQuery);
 
@@ -228,13 +210,21 @@
                 return data[position];
             }
 
+            function playlist_click(e) {
+                counter = e.target.dataset.id;
+                console.log(counter);
+                player.stopVideo();
+                player.loadVideoById(videos[counter]['vid']);
+                $('#title').html(videos[counter]['title']);
+            }
+
             // create youtube player
             var player;
             function onYouTubePlayerAPIReady() {
                 player = new YT.Player('player', {
                   height: '390',
                   width: '640',
-                  videoId: data[0]['vid'], 
+                  videoId: videos[0]['vid'], 
                   events: {
                     'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange,
@@ -242,12 +232,20 @@
                   }
                 });
 
-                $('#title').html(data[0]['title']);
+                $('#title').html(videos[0]['title']);
             }
         
             // autoplay video
             function onPlayerReady(event) {
                 event.target.playVideo();
+                $(".thumbTitle").click(function (e) { 
+                    console.log("  CLICKED")
+                    counter = e.target.dataset.id;
+                    console.log(counter);
+                    player.stopVideo();
+                    player.loadVideoById(videos[counter]['vid']);
+                    $('#title').html(videos[counter]['title']);
+                });
             }
         
             // check for video complete event
@@ -266,12 +264,12 @@
             // load the next video
             function nextVideo(){
                 console.log('loading next video, exiting index ' + counter);
-                if (counter + 1 < data.length){
+                if (counter + 1 < videos.length){
                     counter++;
                     player.stopVideo();
-                    player.loadVideoById(data[counter]['vid']);
+                    player.loadVideoById(videos[counter]['vid']);
                 }
-                $('#title').html(data[counter]['title']);
+                $('#title').html(videos[counter]['title']);
             }
         
             // load the previous video
@@ -280,9 +278,9 @@
                 if (counter > 0){
                     counter--;
                     player.stopVideo();
-                    player.loadVideoById(data[counter]['vid']);
+                    player.loadVideoById(videos[counter]['vid']);
                 }
-                $('#title').html(data[counter]['title']);
+                $('#title').html(videos[counter]['title']);
             }
         
         </script>        

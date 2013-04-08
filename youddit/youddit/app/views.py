@@ -38,7 +38,7 @@ class VideosView(View):
         if 'cat' in request.GET:
             cat = request.GET['cat']
         
-        v = Videos(self.subreddit)
+        v = Videos(subreddit=self.subreddit)
         videos = v.get_videos(cat, page, limit)
         """
         import pprint
