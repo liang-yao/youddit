@@ -184,8 +184,9 @@
                     video = data[cat]['videos'][i];
                     $('.jTscroller').append(compiled({ id: i, vid: video['vid'], title: video['title'] }))
                 }
-            }
+                $(".darken").click(playListClick);
 
+            }
             function load_more() {
                 console.log("Loading more");
                 $.ajax({
@@ -310,7 +311,6 @@
             // autoplay video
             function onPlayerReady(event) {
                 event.target.playVideo();
-                $(".darken").click(playListClick);            
             }
         
             // check for video complete event
