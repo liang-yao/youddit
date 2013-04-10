@@ -93,6 +93,9 @@
                         </form>
                     </div>
                     <div class = "span 4">
+                        <button id='hot'>Hot</button>
+                        <button id='top'>Top</button>
+                        <button id='controversial'>Controversial</button>
                         <a href = "#">Previous</a>
                         <a href = "#">Next</a>
                     </div>
@@ -138,17 +141,71 @@
 		<script src="{{ STATIC_URL }}js/underscore-min.js"></script>
 
 		<script>
-            var data = {{ data|safe }}; 
-            var videos = data['videos'];
-            var counter = 0;
             
+            var subreddit = "videos",
+                init_data = {{ data|safe }},
+                data = {}, 
+                cat = 'hot', // Current category displayed
+                counter = -1; // Position id of video being played now
+
+                data['hot'] = {};
+                data['hot']['videos'] = init_data['videos'];
+                data['hot']['page'] = 1;
+           
+            function next_video() {
+                return data[cat]['videos'][++counter];
+            }
+
+            function prev_video() {
+                return data[cat]['videos'][--counter];
+            }
+
+            function has_next() {
+                return (counter < data[cat]['videos'].length-1);
+            }
+
+            function has_prev() {
+                return (counter > 0);
+            }
+
+            function add_videos(v) {
+                data[cat]['videos'].push(v);
+            }
+
             function load_videos() {
                 var compiled = _.template($('#playlist_template').html()),
                     video;
-                for (i in videos) {
-                    video = videos[i];
+                for (i in data[cat]['videos']) {
+                    video = data[cat]['videos'][i];
                     $('.jTscroller').append(compiled({ id: i, vid: video['vid'], title: video['title'] }))
                 }
+            }
+
+            function load_more() {
+                console.log("Loading more");
+                $.ajax({
+                    method: "GET",
+                    url: "./" + subreddit, 
+                    contentType: "application/json", 
+                    data: {page: ++data[cat]['page'], cat: cat},
+                    success: function (resp) {
+                        resp = JSON.parse(resp);
+                        var compiled = _.template($('#playlist_template').html()),
+                            video,
+                            last_id = data[cat]['videos'].length-1;
+                        //$('.jTscroller').empty();
+                        for (i in resp['videos']) {
+                            add_videos(resp['videos'][i]);
+                            video = resp['videos'][i];
+                            console.log(video)
+                            $('.jTscroller').append(compiled({ id: ++last_id, vid: video['vid'], title: video['title'] }))
+                        }
+                        $(".darken").click(playListClick);
+                    },
+                    error: function (resp) {
+                        console.log(resp);
+                    }
+                    });
             }
 
             (function($){
@@ -167,7 +224,8 @@
                     autoScrolling:0, 
                     autoScrollingSpeed:2000, 
                     autoScrollingEasing:"easeInOutQuad", 
-                    autoScrollingDelay:500 
+                    autoScrollingDelay:500, 
+                    onLast: load_more
                 });
             }
             })(jQuery);
@@ -206,25 +264,23 @@
                 setInterval(keepFocused, 2000);
             }
             
-            function get_video(provider, position) {
-                return data[position];
-            }
-
-            function playlist_click(e) {
-                counter = e.target.dataset.id;
+            function playListClick() {
+                counter = parseInt($(this).attr('data-id')-1);
                 console.log(counter);
                 player.stopVideo();
-                player.loadVideoById(videos[counter]['vid']);
-                $('#title').html(videos[counter]['title']);
+                var next = next_video();
+                player.loadVideoById(next['vid']);
+                $('#title').html(next['title']);
             }
 
             // create youtube player
             var player;
             function onYouTubePlayerAPIReady() {
+                var first_vid = next_video();
                 player = new YT.Player('player', {
                   height: '390',
                   width: '640',
-                  videoId: videos[0]['vid'], 
+                  videoId: first_vid['vid'], 
                   events: {
                     'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange,
@@ -232,19 +288,13 @@
                   }
                 });
 
-                $('#title').html(videos[0]['title']);
+                $('#title').html(first_vid['title']);
             }
             
             // autoplay video
             function onPlayerReady(event) {
                 event.target.playVideo();
-                $(".darken").click(function (e) { 
-                    counter = parseInt($(this).attr('data-id'));
-                    console.log(counter);
-                    player.stopVideo();
-                    player.loadVideoById(videos[counter]['vid']);
-                    $('#title').html(videos[counter]['title']);
-                });
+                $(".darken").click(playListClick);            
             }
         
             // check for video complete event
@@ -263,23 +313,27 @@
             // load the next video
             function nextVideo(){
                 console.log('loading next video, exiting index ' + counter);
-                if (counter + 1 < videos.length){
-                    counter++;
+                var next;
+                if (has_next()){
+                    next = next_video();
+                    console.log(next);
                     player.stopVideo();
-                    player.loadVideoById(videos[counter]['vid']);
+                    player.loadVideoById(next['vid']);
+                    console.log(next);
+                    $('#title').html(next['title']);
                 }
-                $('#title').html(videos[counter]['title']);
             }
         
             // load the previous video
             function prevVideo(){
                 console.log('loading prev video, exiting index ' + counter);
-                if (counter > 0){
-                    counter--;
+                var next;
+                if (has_prev()){
+                    next = prev_video();
                     player.stopVideo();
-                    player.loadVideoById(videos[counter]['vid']);
+                    player.loadVideoById(next['vid']);
+                    $('#title').html(next['title']);
                 }
-                $('#title').html(videos[counter]['title']);
             }
         
         </script>        

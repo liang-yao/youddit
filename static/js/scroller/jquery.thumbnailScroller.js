@@ -16,7 +16,8 @@ Homepage: manos.malihu.gr/jquery-thumbnail-scroller
 		autoScrolling:0, //value: integer
 		autoScrollingSpeed:8000, //value: milliseconds
 		autoScrollingEasing:"easeInOutQuad", //easing type
-		autoScrollingDelay:2500 //value: milliseconds
+		autoScrollingDelay:2500, //value: milliseconds
+        onLast: false
 	};
 	var options=$.extend(defaults,options);
     return this.each(function(){ 
@@ -149,7 +150,7 @@ Homepage: manos.malihu.gr/jquery-thumbnail-scroller
                     
                     // ############## up scroll
                     if (delta < 0){
-                        
+                        reset_width();
                         var posX=$scroller.position().left;
                         var diffX=totalWidth+(posX-$this.width());
                         //var diffX=200;
@@ -164,6 +165,8 @@ Homepage: manos.malihu.gr/jquery-thumbnail-scroller
                             //$scroller.stop().animate({left:$this.width()-totalWidth},options.scrollSpeed,options.scrollEasing);
                             // left: [limit]
                             $scroller.stop().animate({left:$this.width()-totalWidth},options.scrollSpeed,options.scrollEasing);
+                            if(options.onLast)
+                                options.onLast();
                         }
                         
                     }
@@ -248,14 +251,28 @@ Homepage: manos.malihu.gr/jquery-thumbnail-scroller
 		        });
 		});
 		
-*/		
+*/		function reset_width () {
+                /*$scrollerContainer=$this.children(".jTscrollerContainer");
+                $scroller=$this.children(".jTscrollerContainer").children(".jTscroller");
+                $scrollerNextButton=$this.children(".jTscrollerNextButton");
+                $scrollerPrevButton=$this.children(".jTscrollerPrevButton"); */
+                //set scroller width
+                if(options.scrollerOrientation=="horizontal"){
+                    $scrollerContainer.css("width",999999999999999999999999); 
+                    totalWidth=$scroller.outerWidth(true);
+                    $scrollerContainer.css("width",totalWidth);
+                }else{
+                        totalWidth=$scroller.outerWidth(true);
+                }
+        }
 		
 		//click scrolling fn
 		function ClickScrolling(){
 			//$scrollerPrevButton.hide();
 			$scrollerNextButton.show();
 			$scrollerNextButton.click(function(e){ //next button
-				e.preventDefault();
+                e.preventDefault();
+                reset_width();	
 				var posX=$scroller.position().left;
 				var diffX=totalWidth+(posX-$this.width());
 				var posY=$scroller.position().top;
@@ -271,6 +288,10 @@ Homepage: manos.malihu.gr/jquery-thumbnail-scroller
 				} else {
 					//$scrollerNextButton.stop().hide("fast");
 					$scroller.stop().animate({left:$this.width()-totalWidth},options.scrollSpeed,options.scrollEasing);
+                        if(options.onLast()) {
+                            options.onLast();
+
+                    }
 				}
 				
 			});
