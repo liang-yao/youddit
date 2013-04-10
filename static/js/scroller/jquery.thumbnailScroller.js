@@ -258,7 +258,7 @@ Homepage: manos.malihu.gr/jquery-thumbnail-scroller
                 $scrollerPrevButton=$this.children(".jTscrollerPrevButton"); */
                 //set scroller width
                 if(options.scrollerOrientation=="horizontal"){
-                    $scrollerContainer.css("width",999999999999999999999999); 
+                    $scrollerContainer.css("width",99999);
                     totalWidth=$scroller.outerWidth(true);
                     $scrollerContainer.css("width",totalWidth);
                 }else{
