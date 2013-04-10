@@ -93,16 +93,16 @@
                         </form>
                     </div>
                     <div class = "span 4">
-                        <button id='hot'>Hot</button>
-                        <button id='top'>Top</button>
-                        <button id='controversial'>Controversial</button>
-                        <a href = "#">Previous</a>
-                        <a href = "#">Next</a>
+                        <button id='hot' onClick="change_cat('hot')">Hot</button>
+                        <button id='top' onClick="change_cat('top')">Top</button>
+                        <button id='controversial' onClick="change_cat('controversial')">Controversial</button>
+                        <a href = "#" onClick='prevVideo()'>Previous</a>
+                        <a href = "#" onClick='nextVideo()'>Next</a>
                     </div>
                 </div>
                 
                 <div class="jTscrollerContainer">
-                    <div class="jTscroller">
+                    <div id='scroller' class="jTscroller">
     
                     </div>
                 </div>
@@ -161,7 +161,12 @@
             }
 
             function has_next() {
-                return (counter < data[cat]['videos'].length-1);
+                if (counter < data[cat]['videos'].length-1)
+                    return true;
+                else {
+                    load_more();
+                    return (counter < data[cat]['videos'].length-1) 
+                }
             }
 
             function has_prev() {
@@ -197,7 +202,6 @@
                         for (i in resp['videos']) {
                             add_videos(resp['videos'][i]);
                             video = resp['videos'][i];
-                            console.log(video)
                             $('.jTscroller').append(compiled({ id: ++last_id, vid: video['vid'], title: video['title'] }))
                         }
                         $(".darken").click(playListClick);
@@ -206,6 +210,26 @@
                         console.log(resp);
                     }
                     });
+            }
+
+            function change_cat(newCat) {
+                if (newCat == cat)
+                    return false;
+                else if (newCat in data) {
+                     cat = newCat;
+                    $('.jTscroller').css({left: 0});
+                    $('.jTscroller').empty();
+                     load_videos();
+                }
+                else {
+                    cat = newCat;
+                    data[cat] = {}
+                    data[cat]['videos'] = [];
+                    data[cat]['page'] = 0;
+                    $('.jTscroller').css({left: 0});
+                    $('.jTscroller').empty();
+                    load_more();
+                }
             }
 
             (function($){
@@ -227,6 +251,7 @@
                     autoScrollingDelay:500, 
                     onLast: load_more
                 });
+
             }
             })(jQuery);
 
@@ -234,21 +259,12 @@
             $(document).keydown(function(e){
                 switch(e.which) {
                     case 37: // left
-                        console.log('left pressed!');
                         prevVideo();
-                        break;
-        
-                    case 38: // up
-                        console.log('up pressed!');
                         break;
         
                     case 39: // right
                         console.log('right pressed!');
                         nextVideo();
-                        break;
-        
-                    case 40: // down
-                        console.log('down pressed!');
                         break;
         
                     default: return; // exit this handler for other keys
@@ -312,21 +328,17 @@
         
             // load the next video
             function nextVideo(){
-                console.log('loading next video, exiting index ' + counter);
                 var next;
                 if (has_next()){
                     next = next_video();
-                    console.log(next);
                     player.stopVideo();
                     player.loadVideoById(next['vid']);
-                    console.log(next);
                     $('#title').html(next['title']);
                 }
             }
         
             // load the previous video
             function prevVideo(){
-                console.log('loading prev video, exiting index ' + counter);
                 var next;
                 if (has_prev()){
                     next = prev_video();
