@@ -99,22 +99,6 @@ function playListClick() {
     set_title(next['title'], next['permalink']);
 }
 
-function onYouTubePlayerAPIReady() {
-    var first_vid = next_video();
-    player = new YT.Player('player', {
-      height: '390',
-      width: '640',
-      videoId: first_vid['vid'], 
-      events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange,
-        'onError' : onPlayerError
-      }
-    });
-    
-    set_title(first_vid['title'], first_vid['permalink']);
-}
-
 // autoplay video
 function onPlayerReady(event) {
     event.target.playVideo();

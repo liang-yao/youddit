@@ -31,8 +31,6 @@ class Videos():
             if 'remote' in kwargs:
                 self._load_videos_remote(self.subreddit)
                 return ''
-            for v in self._load_videos(self.subreddit):
-                data['videos'].append(self._remove_internal_fields(v))
         else:
             if 'ver' not in r:
                 return ""
@@ -64,6 +62,8 @@ class Videos():
         for cat in self.CATEGORIES:
             print cat
             videos = self._get_videos(r, cat, pages=30)
+            if len(videos) == 0:
+                continue
             # Add version and category to each video in list
             videos = [ self._merge(v, {"ver": ver, "cat": self.CATEGORIES[cat]}) for v in videos ]
             self.db.videos.insert(videos)
@@ -72,7 +72,6 @@ class Videos():
                                                    "ver": ver, 
                                                    "status": 0
                                                  }, True )
-        return videos
 
     def _load_videos_remote(self, r):
         from workers import video_worker
@@ -94,6 +93,8 @@ class Videos():
         position = 0
         for page in range(0, pages):
             response = self._request(url, {'limit':100, 'after': after})
+            if not response:
+                return []
             if len(response['data']['children']) == 0:
                 break
             for reddit in response['data']['children']:
@@ -137,12 +138,19 @@ class Videos():
        
         try:
             response = urllib2.urlopen(req)
-        except Exception as e:
+        except urllib2.HTTPException as e:
             print e
-            time.sleep(5)
-            return request(url, params)
-            
-        response = json.loads(response.read())
+            if e.code == 502:
+                time.sleep(5)
+                return request(url, params)
+            else:
+                return None
+        except Exception as e:
+            return None
+        try:
+            response = json.loads(response.read())
+        except Exception as e:
+            return None
         return response
       
     # Returns the video id 

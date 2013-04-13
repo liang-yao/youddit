@@ -142,14 +142,9 @@
 		<script src="{{ STATIC_URL }}js/main.js"></script>
 
 		<script>
-           
-           {% if loading %}
-              setTimeout("window.location.reload()", 1000*30) 
-           {% endif %}
-
 
             var subreddit = "{{ subreddit }}",
-                init_data = {{ data|safe }},
+                init_data = {{ data_raw|safe }},
                 data = {}, 
                 cat = 'hot', // Current category displayed
                 counter = -1; // Position id of video being played now
@@ -163,7 +158,10 @@
             (function($){
             window.onload=function(){
                 {% if loading %}
-                setTimeout("window.location.reload()", 1000*30) 
+                $(".jThumbnailScroller").hide();
+                setTimeout("window.location.reload()", 1000*30); 
+                {% elif data.videos|length == 0 %}
+                    $('#title').html("No videos found");
                 {% else %}
                 load_videos();
 
@@ -182,11 +180,27 @@
                     autoScrollingDelay:500, 
                     onLast: load_more
                 });
-                {% endif %}
-
             }
             })(jQuery);
 
+function onYouTubePlayerAPIReady() {
+                    var first_vid = next_video();
+                    player = new YT.Player('player', {
+                      height: '390',
+                      width: '640',
+                      videoId: first_vid['vid'], 
+                      events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange,
+                        'onError' : onPlayerError
+                      }
+                });
+    
+                 
+                 set_title(first_vid['title'], first_vid['permalink']);
+                }
+
+                {% endif %}
             // handle keyboard arrow key navigation
             $(document).keydown(function(e){
                 switch(e.which) {
