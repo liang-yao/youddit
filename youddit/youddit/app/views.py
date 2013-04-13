@@ -25,7 +25,7 @@ def subreddit(request, subreddit):
     else:
         loading = False
 
-    context = RequestContext(request, { "loading": loading, "data_raw": json.dumps(data), "data_": data, "subreddit": subreddit })
+    context = RequestContext(request, { "loading": loading, "data_raw": json.dumps(data), "data": data, "subreddit": subreddit })
     return HttpResponse(template.render(context))
 
 class VideosView(View):
