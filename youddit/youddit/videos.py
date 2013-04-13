@@ -4,9 +4,14 @@ from pymongo import MongoClient
 class Videos():
     PROVIDERS = { "youtube.com": 1, "youtu.be": 2, "vimeo.com": 3 }
     CATEGORIES = { "top": 0, "hot": 1, "controversial": 2 }
+    
     # List of subreddits we update per hour
     COOL_REDDITS = ["videos"]
     INTERNAL_FIELDS = {'_id': 0, 'subreddit': 0, 'cat': 0 , 'pos': 0 , 'ver': 0 }
+
+    # Updating status
+    UPDATING = 1
+    FREE = 0
 
 
     def __init__(self, **kwargs):
@@ -14,10 +19,43 @@ class Videos():
         self.conn = MongoClient()
         self.db = self.conn.Youddit
 
-    def load_videos(self, r):
+    def get_videos(self, cat, page, limit, **kwargs):
+        # Check if we have the subreddit
+        r = self.db.subreddits.find_one({ "name": self.subreddit })
+        data = {}
+        data["subreddit"] = self.subreddit 
+        data["cat"] = cat
+        data["videos"] = [] 
+
+        if not r:
+            if 'remote' in kwargs:
+                self._load_videos_remote(self.subreddit)
+                return ''
+            for v in self._load_videos(self.subreddit):
+                data['videos'].append(self._remove_internal_fields(v))
+        else:
+            if 'ver' not in r:
+                return ""
+            query = self.db.videos.find({ "subreddit": self.subreddit, 
+                                      "cat": self.CATEGORIES[cat], 
+                                      "ver": r['ver'] }, 
+                                      self.INTERNAL_FIELDS).sort('pos', 1).skip((page-1)*limit).limit(limit)
+            data['videos'] = [ v for v in query ]
+        
+            # If data is older than a day, update videos
+            if r['updated_at'] <= (time.time()-24*60*60):
+                self._load_videos_remote(self.subreddit)
+
+        return data
+
+    def _load_videos(self, r):
         print "Subreddit: ", r
-        reddit = self.db.subreddits.find_one({"name": r})
+        reddit = self.db.subreddits.find_and_modify(query={"name": r}, update={'$set': {'status': self.UPDATING}}, upsert=True)
+        print reddit
         if reddit:
+            # Check if this reddit is already being updated
+            if reddit['status'] == self.UPDATING:
+                return []
             ver = reddit['ver']
         else:
             ver = 0
@@ -29,31 +67,16 @@ class Videos():
             # Add version and category to each video in list
             videos = [ self._merge(v, {"ver": ver, "cat": self.CATEGORIES[cat]}) for v in videos ]
             self.db.videos.insert(videos)
-            self.db.subreddits.update({ "name": r }, { "name": r,
-                                                  "updated_at": time.time(),
-                                                  "ver": ver
-                                                }, True )
+        self.db.subreddits.update({ "name": r }, { "name": r,
+                                                   "updated_at": time.time(),
+                                                   "ver": ver, 
+                                                   "status": 0
+                                                 }, True )
         return videos
 
-    def get_videos(self, cat, page, limit):
-        # Check if we have the subreddit
-        r = self.db.subreddits.find_one({ "name": self.subreddit })
-        data = {}
-        data["subreddit"] = self.subreddit 
-        data["cat"] = cat
-        data["videos"] = [] 
-
-        if not r:
-            for v in self.load_videos(self.subreddit):
-                data['videos'].append(self._remove_internal_fields(v))
-        else:
-            query = self.db.videos.find({ "subreddit": self.subreddit, 
-                                      "cat": self.CATEGORIES[cat], 
-                                      "ver": r['ver'] }, 
-                                      self.INTERNAL_FIELDS).sort('pos', 1).skip((page-1)*limit).limit(limit)
-            data['videos'] = [ v for v in query ]
-                
-        return data
+    def _load_videos_remote(self, r):
+        from workers import video_worker
+        video_worker.delay(r)
 
     def _remove_internal_fields(self, source):
         for f in self.INTERNAL_FIELDS:
@@ -92,7 +115,7 @@ class Videos():
                                     "title": r['title'],
                                     "provider": provider, 
                                     "vid": vid, 
-                                    "subreddit": r['subreddit'],
+                                    "subreddit": subreddit,
                                     "score": r['score'],
                                     "permalink": r['permalink'],
                                     "created": r['created'],

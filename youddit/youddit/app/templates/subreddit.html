@@ -80,7 +80,7 @@
                 <div class="span7" id="player"></div>
                 <!-- <div id="infoRight"> -->
                 <div class="span4" id="vidTitle">
-                    <a href='#' id="title">Welcome!</a>
+                    <a href='#' id="title">Looking for videos. This could take a minute</a>
                 </div> 
             </div>
             
@@ -88,7 +88,7 @@
                 
                 <div class="row">
                     <div class = "span 4 offset4">       
-                         <form name='search' class="navbar-form">
+                        <form name='search' class="navbar-form">
                             Stream:  <input name='stream' type="text" class="search-query" placeholder="Search subreddits">
                         </form>
                     </div>
@@ -142,8 +142,13 @@
 		<script src="{{ STATIC_URL }}js/main.js"></script>
 
 		<script>
-            
-            var subreddit = "videos",
+           
+           {% if loading %}
+              setTimeout("window.location.reload()", 1000*30) 
+           {% endif %}
+
+
+            var subreddit = "{{ subreddit }}",
                 init_data = {{ data|safe }},
                 data = {}, 
                 cat = 'hot', // Current category displayed
@@ -157,6 +162,9 @@
 
             (function($){
             window.onload=function(){
+                {% if loading %}
+                setTimeout("window.location.reload()", 1000*30) 
+                {% else %}
                 load_videos();
 
                 $("#tS2").thumbnailScroller({ 
@@ -174,6 +182,7 @@
                     autoScrollingDelay:500, 
                     onLast: load_more
                 });
+                {% endif %}
 
             }
             })(jQuery);
@@ -198,13 +207,12 @@
            if (window.chrome) { 
                 setInterval(keepFocused, 2000);
             }
-
+            
             $("form[name='search']").submit( function(e) {
                 e.preventDefault();
                 var url = "../r/" + $('form :input').val();
                 window.location.href = url;
             });
-
 
         </script>        
         

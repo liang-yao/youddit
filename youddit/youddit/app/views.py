@@ -13,6 +13,21 @@ def index(request):
     context = RequestContext(request, { "data": json.dumps(data) })
     return HttpResponse(template.render(context))
 
+def subreddit(request, subreddit):
+    template = loader.get_template('subreddit.html')
+    
+    v = Videos(subreddit=subreddit)
+    data = v.get_videos('hot', 1, VideosView.LIMIT, remote=True)
+    if data == '':
+        # Subreddit not in db, set loading
+        loading = True
+        data = []
+    else:
+        loading = False
+
+    context = RequestContext(request, { "loading": loading, "data": json.dumps(data), "subreddit": subreddit })
+    return HttpResponse(template.render(context))
+
 class VideosView(View):
     # Page size, 100 max, 25 default
     LIMIT = 25
