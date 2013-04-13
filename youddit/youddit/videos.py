@@ -173,7 +173,7 @@ class Videos():
     def update():
         v =  Videos()
         for r in Videos.COOL_REDDITS:
-            v.load_videos(r)
+            v._load_videos(r)
 
     @staticmethod
     def clean_up():
