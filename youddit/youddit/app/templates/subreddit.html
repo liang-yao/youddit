@@ -155,14 +155,14 @@
                 data['hot']['videos'] = init_data['videos'];
                 data['hot']['page'] = 1;
 
-            (function($){
-            window.onload=function(){
                 {% if loading %}
                 $(".jThumbnailScroller").hide();
                 setTimeout("window.location.reload()", 1000*30); 
                 {% elif data.videos|length == 0 %}
                     $('#title').html("No videos found");
                 {% else %}
+            (function($){
+            window.onload=function(){
                 load_videos();
 
                 $("#tS2").thumbnailScroller({ 
