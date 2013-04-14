@@ -58,9 +58,9 @@ body {
     width: 100%;
     background-color: rgba(26,26,26,0.4);
 
-  -webkit-box-shadow: 0 1px 10px black;
-     -moz-box-shadow: 0 1px 10px black;
-          box-shadow: 0 1px 10px black;
+  -webkit-box-shadow: 0 -1px 10px black;
+     -moz-box-shadow: 0 -1px 10px black;
+          box-shadow: 0 -1px 10px black;
 }
 
 #player {
