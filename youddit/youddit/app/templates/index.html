@@ -39,7 +39,7 @@
                         <span class="icon-bar"></span>
                     </a>
                     <a class="brand" href="#">Youddit</a>
-                    <div class="nav-collapse collapse">
+                    <div class="nav-collapse collapse pull-right">
                         <ul class="nav">
                             
 
@@ -88,18 +88,45 @@
                 
                 <div class="row">
                     <div class = "span 4 offset4">       
-                         <form name='search' class="navbar-form">
-                            Stream:  <input name='stream' type="text" class="search-query" placeholder="Search subreddits">
+                        <form class="form-inline">
+                            Stream:
+                            <div class="input-prepend input-append">
+                                <span class="add-on">/r/</span>
+                                <input class="span2" id="appendedPrependedInput" type="text" placeholder="videos">
+                                <select class="span1">
+                                    <option>Hot</option>
+                                    <option>Top</option>
+                                    <option>New</option>
+                                </select>
+                                <button class="btn" type="button">Go!</button>
+                            </div>
                         </form>
                     </div>
                     <div class = "span 4">
-                        <button id='hot' onClick="change_cat('hot')">Hot</button>
-                        <button id='top' onClick="change_cat('top')">Top</button>
-                        <button id='controversial' onClick="change_cat('controversial')">Controversial</button>
                         <a href = "#" onClick='prevVideo()'>Previous</a>
                         <a href = "#" onClick='nextVideo()'>Next</a>
                     </div>
-                </div>
+                </div> -->
+                
+                    <div class = "span 4 offset4">       
+                        <form class="form-inline">
+                            Stream:
+                            <div class="input-prepend input-append">
+                                <span class="add-on">/r/</span>
+                                <input class="span2" id="appendedPrependedInput" type="text" placeholder="videos">
+                                <select class="span1">
+                                    <option>Hot</option>
+                                    <option>Top</option>
+                                    <option>New</option>
+                                </select>
+                                <button class="btn" type="button">Go!</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class = "span 4">
+                        <a href = "#" class="playerPrevButton" onClick='prevVideo()'></a>
+                        <a href = "#" class="playerNextButton" onClick='nextVideo()'></a>
+                    </div>
                 
                 <div class="jTscrollerContainer">
                     <div id='scroller' class="jTscroller">

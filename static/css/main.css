@@ -58,9 +58,9 @@ body {
     width: 100%;
     background-color: rgba(26,26,26,0.4);
 
-  -webkit-box-shadow: 0 1px 10px black;
-     -moz-box-shadow: 0 1px 10px black;
-          box-shadow: 0 1px 10px black;
+  -webkit-box-shadow: 0 -1px 10px black;
+     -moz-box-shadow: 0 -1px 10px black;
+          box-shadow: 0 -1px 10px black;
 }
 
 #player {
@@ -87,4 +87,37 @@ body {
 
 a.darken:hover {
     color: #fff;
+}
+
+
+.navbar .nav > li > a {
+    float: none;
+    line-height: 19px;
+    padding: 9px 10px 11px;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    color:  #ddd;
+}
+
+
+.playerNextButton, .playerPrevButton{ 
+    display:block;
+    width:26px;
+    height:26px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+    opacity:0.1;
+}
+
+.playerNextButton:hover, .playerPrevButton:hover{background-color:#000; opacity:0.1;}
+
+.playerNextButton{ 
+    background:#fff url(nextArrow.png) center center;
+    margin:-26px 0 0 28px;
+}
+ 
+.playerPrevButton{ 
+    background:#fff url(nextArrow.png) center center;
+    margin:8px 0 0 0;
 }
