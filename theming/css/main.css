@@ -37,7 +37,6 @@ body {
     
     color: #fff;
     font-family: 'Raleway', serif;
-    line-height: 1.357;
 
   -webkit-box-shadow: 0 1px 10px black;
      -moz-box-shadow: 0 1px 10px black;
@@ -98,9 +97,15 @@ a.darken:hover {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
     color:  #ddd;
 }
-
+.navbar .nav > li > a:hover {
+    color:  #fff;
+}
 
 .playerNextButton, .playerPrevButton{ 
+    
+}
+
+/*.playerNextButton, .playerPrevButton{ 
     display:block;
     width:26px;
     height:26px;
@@ -110,9 +115,9 @@ a.darken:hover {
     opacity:0.1;
 }
 
-.playerNextButton:hover, .playerPrevButton:hover{background-color:#000; opacity:0.1;}
+.playerNextButton:hover, .playerPrevButton:hover{background-color:#000; opacity:0.1;}*/
 
-.playerNextButton{ 
+/*.playerNextButton{ 
     background:#fff url(nextArrow.png) center center;
     margin:-26px 0 0 28px;
 }
@@ -120,4 +125,32 @@ a.darken:hover {
 .playerPrevButton{ 
     background:#fff url(nextArrow.png) center center;
     margin:8px 0 0 0;
+}*/
+.dropdown-menu{
+    background-color:rgba(26,26,26,0.8);
+}
+
+.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background: none;
+  color: #fff;
+}
+
+.navbar .nav > li > a:focus, .navbar .nav > li > a:hover {
+  color: #fff;
+}
+
+a:active,a:focus {
+    outline: none;
+}
+
+
+.navbar .divider-vertical {
+  border-right-color: rgba(26,26,26,0.3);
+  border-left-color: rgba(26,26,26,0.05);
+
+}
+
+.navbar .brand {
+  color: #DDDDDD;
+  text-shadow: 0 1px 0 #777777;
 }

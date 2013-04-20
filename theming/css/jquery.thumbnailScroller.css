@@ -6,10 +6,11 @@ scrollers styling
 .jThumbnailScroller{position:relative; width:800px; height:178px; margin:160px auto 0 auto; background:#bbb; padding:0; overflow:hidden;}
 .jThumbnailScroller .jTscrollerContainer{position:absolute; margin-top:38px;}
 .jThumbnailScroller .jTscroller{position:relative; height:100%; margin:0; left:0; top:0; display:inline-block; *display:inline;}
-.jThumbnailScroller .jTscrollerNextButton,.jThumbnailScroller .jTscrollerPrevButton{position:absolute; display:block; width:60px; height:26px; -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; opacity:0.1;}
-.jThumbnailScroller .jTscrollerNextButton{background:#fff url(nextArrow.png) center center;}
-.jThumbnailScroller .jTscrollerPrevButton{background:#fff url(prevArrow.png) center center;}
-.jThumbnailScroller .jTscrollerNextButton:hover,.jThumbnailScroller .jTscrollerPrevButton:hover{background-color:#000; opacity:0.1;}
+.jThumbnailScroller .jTscrollerNextButton,.jThumbnailScroller .jTscrollerPrevButton{position:absolute; display:block; width:60px; height:26px; -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px;}
+/*.jThumbnailScroller .jTscrollerNextButton,.jThumbnailScroller .jTscrollerPrevButton{position:absolute; display:block; width:60px; height:26px; -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; opacity:0.1;}*/
+/*.jThumbnailScroller .jTscrollerNextButton{background:#fff url(nextArrow.png) center center;}
+.jThumbnailScroller .jTscrollerPrevButton{background:#fff url(prevArrow.png) center center;}*/
+/*.jThumbnailScroller .jTscrollerNextButton:hover,.jThumbnailScroller .jTscrollerPrevButton:hover{background-color:#000; opacity:0.1;}*/
 .jThumbnailScroller .jTscroller a{display:block; float:left; margin:3px 3px 0 0;}
 .jThumbnailScroller .jTscroller a:first-child{margin-left:3px;}
 .jThumbnailScroller .jTscroller a img{border:none; height: 136px;}
