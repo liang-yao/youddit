@@ -63,11 +63,12 @@ body {
 }
 
 #player {
-    max-width: 640px;
+    max-width: 720px;
+    border:none;
 }
 
 #vidTitle {
-    width:468px;
+    width:436px;
     padding-left:32px;
 }
 
