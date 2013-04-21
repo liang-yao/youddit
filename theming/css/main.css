@@ -102,8 +102,15 @@ a.darken:hover {
     color:  #fff;
 }
 
-.playerNextButton, .playerPrevButton{ 
-    
+.playerNextButton, .playerPauseButton, .playerPrevButton{ 
+    padding: 10px;
+    display:inline-block;
+}
+
+.playerNextButton, .playerPrevButton{
+    padding: 10px 14px;
+    border-right: 1px solid rgba(26,26,26,0.4);
+    border-left: 1px solid rgba(26,26,26,0.4);
 }
 
 /*.playerNextButton, .playerPrevButton{ 
