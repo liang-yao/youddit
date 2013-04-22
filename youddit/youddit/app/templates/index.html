@@ -168,20 +168,20 @@
 
             }
             })(jQuery);
-function onYouTubePlayerAPIReady() {
+            function onYouTubePlayerAPIReady() {
                     var first_vid = next_video();
                     player = new YT.Player('player', {
                       height: '390',
-                      width: '640',
-                      videoId: first_vid['vid'], 
+                      width: '720',
+                      videoId: first_vid['vid'],
+                      playerVars: { 'autoplay': 1, 'autohide': 1, 'showinfo': 0, 'iv_load_policy': 3 },
                       events: {
                         'onReady': onPlayerReady,
                         'onStateChange': onPlayerStateChange,
                         'onError' : onPlayerError
                       }
                 });
-    
-                 
+                
                  set_title(first_vid['title'], first_vid['permalink']);
                 }
 
