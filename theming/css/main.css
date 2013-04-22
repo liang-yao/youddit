@@ -107,10 +107,24 @@ a.darken:hover {
     display:inline-block;
 }
 
+.playerNextButton:hover, .playerPauseButton:hover, .playerPrevButton:hover{ 
+
+}
+
 .playerNextButton, .playerPrevButton{
     padding: 10px 14px;
     border-right: 1px solid rgba(26,26,26,0.4);
     border-left: 1px solid rgba(26,26,26,0.4);
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    background-image: url("../img/glyphicons-halflings-grey.png");
+}
+
+a:hover > [class^="icon-"],
+a:hover > [class*=" icon-"] {
+  background-image: url("../img/glyphicons-halflings-white.png");
 }
 
 /*.playerNextButton, .playerPrevButton{ 
