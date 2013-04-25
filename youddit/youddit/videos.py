@@ -13,7 +13,6 @@ class Videos():
     UPDATING = 1
     FREE = 0
 
-
     def __init__(self, **kwargs):
         self.subreddit = kwargs.get('subreddit', '')
         self.conn = MongoClient()
@@ -22,10 +21,6 @@ class Videos():
     def get_videos(self, cat, page, limit, **kwargs):
         # Check if we have the subreddit
         r = self.db.subreddits.find_one({ "name": self.subreddit })
-        data = {}
-        data["subreddit"] = self.subreddit 
-        data["cat"] = cat
-        data["videos"] = [] 
 
         if not r:
             if 'remote' in kwargs:
@@ -38,13 +33,17 @@ class Videos():
                                       "cat": self.CATEGORIES[cat], 
                                       "ver": r['ver'] }, 
                                       self.INTERNAL_FIELDS).sort('pos', 1).skip((page-1)*limit).limit(limit)
+            data = {}
+            data["subreddit"] = self.subreddit 
+            data["cat"] = cat
+            data["videos"] = [] 
             data['videos'] = [ v for v in query ]
         
             # If data is older than a day, update videos
             if r['updated_at'] <= (time.time()-24*60*60):
                 self._load_videos_remote(self.subreddit)
 
-        return data
+            return data
 
     def _load_videos(self, r):
         print "Subreddit: ", r
@@ -61,7 +60,11 @@ class Videos():
         videos = []
         for cat in self.CATEGORIES:
             print cat
-            videos = self._get_videos(r, cat, pages=30)
+            try:
+                videos = self._get_videos(r, cat, pages=30)
+            except Exception as e:
+                print e
+                pass
             if len(videos) == 0:
                 continue
             # Add version and category to each video in list
@@ -72,6 +75,7 @@ class Videos():
                                                    "ver": ver, 
                                                    "status": 0
                                                  }, True )
+        self.db.videos.remove({"subreddit": r, "ver": { "$lt": ver }}) 
 
     def _load_videos_remote(self, r):
         from workers import video_worker
