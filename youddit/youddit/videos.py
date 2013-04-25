@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 class Videos():
     PROVIDERS = { "youtube.com": 1, "youtu.be": 2, "vimeo.com": 3 }
-    CATEGORIES = { "top": 0, "hot": 1, "controversial": 2 }
+    CATEGORIES = { "hot": 0, "top": 1, "controversial": 2 }
     
     # List of subreddits we update per hour
     COOL_REDDITS = ["videos"]
@@ -28,7 +28,7 @@ class Videos():
                 return ''
         else:
             if 'ver' not in r:
-                return ""
+                r['ver'] = 1
             query = self.db.videos.find({ "subreddit": self.subreddit, 
                                       "cat": self.CATEGORIES[cat], 
                                       "ver": r['ver'] }, 
@@ -40,7 +40,7 @@ class Videos():
             data['videos'] = [ v for v in query ]
         
             # If data is older than a day, update videos
-            if r['updated_at'] <= (time.time()-24*60*60):
+            if 'updated_at' in r and r['updated_at'] <= (time.time()-24*60*60):
                 self._load_videos_remote(self.subreddit)
 
             return data
