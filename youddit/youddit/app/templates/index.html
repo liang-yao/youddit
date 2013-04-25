@@ -81,10 +81,10 @@
                             <div class="input-prepend input-append">
                                 <span class="add-on">/r/</span>
                                 <input class="span2" id="appendedPrependedInput" type="text" placeholder="videos">
-                                <select class="span1">
-                                    <option>Hot</option>
-                                    <option>Top</option>
-                                    <option>New</option>
+                                <select class="span1" onChange='change_cat(this)'>
+                                    <option value='hot'>Hot</option>
+                                    <option value='top'>Top</option>
+                                    <option value='controversial'>Controversial</option>
                                 </select>
                                 <button class="btn" type="button">Go!</button>
                             </div>

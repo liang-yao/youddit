@@ -65,7 +65,8 @@ function load_more() {
         });
 }
 
-function change_cat(newCat) {
+function change_cat(e) {
+    var newCat = e.options[e.selectedIndex].value;
     if (newCat == cat)
         return false;
     else if (newCat in data) {
