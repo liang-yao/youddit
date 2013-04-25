@@ -58,7 +58,8 @@ body {
 
 #player {
     max-width: 720px;
-    border:none;
+    border: none;
+    visibility: visible;
 }
 
 #vidTitle {
