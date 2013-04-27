@@ -1,0 +1,14 @@
+[2013-04-26 23:58:00,919: DEBUG/MainProcess] [Worker] Loading modules.
+[2013-04-26 23:58:00,980: DEBUG/MainProcess] [Worker] Claiming components.
+[2013-04-26 23:58:00,980: DEBUG/MainProcess] [Worker] Building boot step graph.
+[2013-04-26 23:58:00,982: DEBUG/MainProcess] [Worker] New boot order: {ev, queues, beat, pool, mediator, autoreloader, timers, state-db, autoscaler, consumer}
+[2013-04-26 23:58:00,984: DEBUG/MainProcess] Starting celery.worker.hub.Hub...
+[2013-04-26 23:58:00,984: DEBUG/MainProcess] celery.worker.hub.Hub OK!
+[2013-04-26 23:58:00,984: DEBUG/MainProcess] Starting celery.concurrency.processes.TaskPool...
+[2013-04-26 23:58:00,994: DEBUG/MainProcess] celery.concurrency.processes.TaskPool OK!
+[2013-04-26 23:58:00,994: DEBUG/MainProcess] Starting celery.worker.consumer.Consumer...
+[2013-04-26 23:58:00,995: WARNING/MainProcess] celery@ubuntu ready.
+[2013-04-26 23:58:00,995: DEBUG/MainProcess] consumer: Re-establishing connection to the broker...
+[2013-04-26 23:58:00,999: INFO/MainProcess] consumer: Connected to redis://root@localhost:6379//.
+[2013-04-26 23:58:01,000: DEBUG/MainProcess] consumer: basic.qos: prefetch_count->20
+[2013-04-26 23:58:01,014: DEBUG/MainProcess] consumer: Ready to accept tasks!
