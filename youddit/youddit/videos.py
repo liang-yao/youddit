@@ -142,7 +142,7 @@ class Videos():
        
         try:
             response = urllib2.urlopen(req)
-        except urllib2.HTTPException as e:
+        except urllib2.HTTPError as e:
             print e
             if e.code == 502:
                 time.sleep(5)
