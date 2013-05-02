@@ -1,4 +1,4 @@
-import urllib2, urllib, urlparse, simplejson as json, time, re, sys
+import urllib2, urllib, urlparse, simplejson as json, time, re, sys, traceback
 from pymongo import MongoClient
 
 class Videos():
@@ -64,6 +64,7 @@ class Videos():
                 videos = self._get_videos(r, cat, pages=30)
             except Exception as e:
                 print e
+                print traceback.format_exc()
                 pass
             if len(videos) == 0:
                 continue
@@ -75,7 +76,7 @@ class Videos():
                                                    "ver": ver, 
                                                    "status": 0
                                                  }, True )
-        self.db.videos.remove({"subreddit": r, "ver": { "$lt": ver }}) 
+        self._clean_up(r, ver)
 
     def _load_videos_remote(self, r):
         from workers import video_worker
@@ -115,6 +116,12 @@ class Videos():
                     if vid == '':
                         continue
                     position += 1
+                    try:
+                        self._generate_bg(vid)
+                    except Exception as e:
+                        print e
+                        pass
+
                     # appending the video data to the videos list
                     videos.append({ "rid": r['id'], # Reddit id
                                     "title": r['title'],
@@ -179,6 +186,10 @@ class Videos():
         d1.update(d2)
         return d1
 
+    def _clean_up(self, r, ver):
+        """ Remove all vids from a subreddit with a version lower than 'ver'"""
+        self.db.videos.remove({"subreddit": r, "ver": { "$lt": ver }}) 
+
     # Update the cool reddits
     # This should be called in a cron job
     @staticmethod
@@ -186,22 +197,29 @@ class Videos():
         v =  Videos()
         for r in Videos.COOL_REDDITS:
             v._load_videos(r)
+    
+    """ Background images """
+    
+    def _generate_bg(self, vid):
+        import os
+        if not os.getcwd().endswith('/static/bg/temp'):
+            print os.getcwd()
+            print 'ZZZ'
+            os.chdir("../../static/bg/temp")
+        
+        if not self._bg_exists(vid):
+            os.system("wget http://img.youtube.com/vi/%(id)s/hqdefault.jpg -O %(id)s.jpg"%{'id': vid})
+            os.system("convert %(id)s.jpg -modulate 100,0 -blur 0x12 -resize 1200 ../%(id)s.png"%{'id': vid})
+            os.remove("%(id)s.jpg"%{'id': vid})
 
-    @staticmethod
-    def clean_up():
-        db = MongoClient().Youddit
-        for r in Videos.COOL_REDDITS:
-            reddit = db.subreddits.find_one({"name": r})
-            print r
-            if not reddit:
-                continue
-            db.videos.remove({"subreddit": reddit['name'], "ver": { "$lt": reddit['ver'] }}) 
+    def _bg_exists(self, vid):
+        import os
+        return os.path.exists("../%s.png"%(vid))
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'update':
         Videos.update()
-        Videos.clean_up()
         print 'Done'
 
 
