@@ -146,7 +146,7 @@ class Videos():
             print e
             if e.code == 502:
                 time.sleep(5)
-                return request(url, params)
+                return self._request(url, params)
             else:
                 return None
         except Exception as e:
