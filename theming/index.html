@@ -92,7 +92,7 @@
                     </div>
                     <div class = "span 4 offset1">
                         <a href = "#" class="playerPrevButton" onClick='prevVideo()'><i class="icon-step-backward"></i></a>
-                        <a href = "#" class="playerPauseButton" onClick='prevVideo()'><i class="icon-pause"></i></a>
+                        <a href = "#" class="playerPauseButton" id="pButton" onClick='pauseVideo()'><i class="icon-pause"></i></a>
                         <a href = "#" class="playerNextButton" onClick='nextVideo()'><i class="icon-step-forward"></i></a>
                     </div>
                 <div class="jTscrollerContainer">
@@ -192,6 +192,11 @@
                     case 40: // down
                         console.log('down pressed!');
                         break;
+                        
+                    case 32: // space
+                        console.log('space pressed!');
+                        pauseVideo();
+                        break;
         
                     default: return; // exit this handler for other keys
                 }
@@ -208,6 +213,7 @@
             // var playlist=['oRYaGpDUfYU','oWu9TFJjHaM','nKIu9yen5nc','V87VXA6gPuE'];
             var data = [{"permalink": "/r/videos/comments/1azalt/girlfriend_took_me_to_a_wolf_sanctuary_for_my/", "ver": 50, "score": 2530, "vid": "pEJzaSzD-bA", "created": 1364257420.0, "title": "Girlfriend took me to a wolf sanctuary for my birthday. A chain reaction of howling ensued. It was absolutely overwhelming to be standing in the middle of it all.", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1azalt"}, {"permalink": "/r/videos/comments/1ayf8a/all_6_star_wars_movies_at_the_same_time_14226/", "ver": 50, "score": 2271, "vid": "smdMh3Ew6IU", "created": 1364213863.0, "title": "All 6 Star Wars movies at the same time! [142:26]", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayf8a"}, {"permalink": "/r/videos/comments/1ayv8s/never_give_up/", "ver": 50, "score": 2227, "vid": "KxGRhd_iWuE", "created": 1364240509.0, "title": "Never Give Up", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayv8s"}, {"permalink": "/r/videos/comments/1ayvt3/thanks_fuckwit/", "ver": 50, "score": 1881, "vid": "DuTA7DYklRo", "created": 1364241532.0, "title": "Thanks Fuckwit!", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayvt3"}, {"permalink": "/r/videos/comments/1ayzfn/guy_slaps_someone_riding_a_bike_instant_karma_018/", "ver": 50, "score": 1489, "vid": "Zsf0Z3Qj1aY", "created": 1364246759.0, "title": "Guy slaps someone riding a bike. Instant Karma (0:18)", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayzfn"}, {"permalink": "/r/videos/comments/1azrsz/30_years_ago_today_michael_jackson_moonwalked_for/", "ver": 50, "score": 2060, "vid": "LZ8ce4Jdp-Y", "created": 1364270614.0, "title": "30 years ago today, Michael Jackson moonwalked for the very first time during this 1983 concert.", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1azrsz"}, {"permalink": "/r/videos/comments/1aydnz/being_a_firefighter_is_nothing_like_what_you/", "ver": 50, "score": 766, "vid": "3E6WIZ36E2s", "created": 1364212316.0, "title": "Being a firefighter is nothing like what you might have seen in movies or television. This is what it really looks like.", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1aydnz"}, {"permalink": "/r/videos/comments/1ayk9k/the_axis_of_awesome_rage_of_thrones/", "ver": 50, "score": 550, "vid": "1CLCOvZOh1o", "created": 1364219522.0, "title": "The Axis of Awesome - Rage of Thrones", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayk9k"}, {"permalink": "/r/videos/comments/1azay1/doublethink/", "ver": 50, "score": 579, "vid": "_AD3XqEGDIg", "created": 1364257710.0, "title": "Doublethink", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1azay1"}, {"permalink": "/r/videos/comments/1ay7kh/if_reddit_doesnt_know_about_the_new_viking_show/", "ver": 50, "score": 505, "vid": "KlmSiRJZEco", "created": 1364206809.0, "title": "If reddit doesn't know about the new Viking show on History Channel, then it should", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ay7kh"}, {"permalink": "/r/videos/comments/1azcwj/my_friends_2_year_old_has_a_bright_future_of/", "ver": 50, "score": 564, "vid": "8wk-qRfJQPM", "created": 1364259240.0, "title": "My friend's 2 year old has a bright future of crime ahead of him...", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1azcwj"}, {"permalink": "/r/videos/comments/1az9ij/3d_printed_guns_vice_documentary_2430/", "ver": 50, "score": 464, "vid": "DconsfGsXyA", "created": 1364256465.0, "title": "3D Printed Guns (Vice Documentary) 24:30", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1az9ij"}, {"permalink": "/r/videos/comments/1azjxz/man_quits_eating_food_invents_substance_called/", "ver": 50, "score": 394, "vid": "I8WpksPED_Q", "created": 1364264635.0, "title": "Man quits eating food, invents substance called \"soylent\" to replace it", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1azjxz"}, {"permalink": "/r/videos/comments/1ay38b/cuba_thats_a_small_island/", "ver": 50, "score": 268, "vid": "FNXNHxEOY8I", "created": 1364203144.0, "title": "\"Cuba... that's a small island.\"", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ay38b"}, {"permalink": "/r/videos/comments/1ayxaz/college_football_trick_plays/", "ver": 50, "score": 232, "vid": "0ZL_q7oUVrQ", "created": 1364243872.0, "title": "College football trick plays", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayxaz"}, {"permalink": "/r/videos/comments/1azxcp/man_pulls_gun_in_road_rage_incident_035/", "ver": 50, "score": 354, "vid": "_lC0fi3UmJw", "created": 1364274461.0, "title": "Man pulls gun in road rage incident. [0:35]", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1azxcp"}, {"permalink": "/r/videos/comments/1azx14/played_the_wolf_sanctuary_video_and_my_pocketwolf/", "ver": 50, "score": 275, "vid": "CsRF3qYnSLI", "created": 1364274208.0, "title": "Played the wolf sanctuary video and my pocket-wolf joined the show", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1azx14"}, {"permalink": "/r/videos/comments/1ayg5r/carl_sagen_explains_the_4th_dimension/", "ver": 50, "score": 180, "vid": "zCebuJi0GDk", "created": 1364214808.0, "title": "Carl Sagen explains the 4th dimension.", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayg5r"}, {"permalink": "/r/videos/comments/1ayxjk/best_voice_over_i_have_heard_stalker_nsfw/", "ver": 50, "score": 182, "vid": "0bLpfAtFV-A", "created": 1364244238.0, "title": "Best voice over I have heard. (Stalker) NSFW ", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayxjk"}, {"permalink": "/r/videos/comments/1ayw0w/man_sleeps_with_tiger_in_his_bed_201/", "ver": 50, "score": 173, "vid": "Znpnf9D2VIk", "created": 1364241891.0, "title": "Man sleeps with tiger in his bed. - [2:01]", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayw0w"}, {"permalink": "/r/videos/comments/1ayv3x/how_to_tame_an_ostrich_of_middle_earth/", "ver": 50, "score": 126, "vid": "C4J1yOGJ9wI", "created": 1364240269.0, "title": "How To Tame An Ostrich (of Middle Earth??)", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayv3x"}, {"permalink": "/r/videos/comments/1ayw9v/russian_revenge/", "ver": 50, "score": 122, "vid": "F5JRLn4nGEs", "created": 1364242283.0, "title": "Russian revenge", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayw9v"}, {"permalink": "/r/videos/comments/1ay7ot/how_stuntmen_work_out/", "ver": 50, "score": 97, "vid": "kyOWj-ZZNc4", "created": 1364206914.0, "title": "How stuntmen work out", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ay7ot"}, {"permalink": "/r/videos/comments/1aziie/incredible_display_of_instrument_mastery_and/", "ver": 50, "score": 115, "vid": "6Ke_qIk93AQ", "created": 1364263545.0, "title": "Incredible display of instrument mastery and humility at the same time. Victor Wooten - Time Keeping. ", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1aziie"}, {"permalink": "/r/videos/comments/1ayh46/havent_seen_this_in_a_while_so_simple_yet_never/", "ver": 50, "score": 85, "vid": "xVG7dfH5DL0", "created": 1364215841.0, "title": "Haven't seen this in a while. So simple, yet never fails to make me laugh. ", "subreddit": "videos", "cat": 0, "provider": 1, "rid": "1ayh46"}]  ; 
             var counter=0;
+            var pauseFlag=0;
             
             function get_video(provider, position) {
                 return data[position];
@@ -217,7 +223,7 @@
             var player;
             function onYouTubePlayerAPIReady() {
                 player = new YT.Player('player', {
-                  height: '390',
+                  height: '378',
                   width: '720',
                   videoId: data[0]['vid'], 
                   playerVars: { 'autoplay': 1, 'autohide': 1, 'showinfo': 0, 'iv_load_policy': 3 },
@@ -269,6 +275,21 @@
                     player.loadVideoById(data[counter]['vid']);
                 }
                 $('#title').html(data[counter]['title']);
+            }
+            
+            // pause the video
+            function pauseVideo(){
+                console.log('pausing video ' + counter);
+                if (pauseFlag < 1){
+                    player.pauseVideo();
+                    document.getElementById("pButton").innerHTML="<i class='icon-play'></i>";
+                    pauseFlag = 1;
+                }
+                else {
+                	player.playVideo();
+                	document.getElementById("pButton").innerHTML="<i class='icon-pause'></i>";
+                	pauseFlag = 0;
+                }
             }
         
         </script>        
