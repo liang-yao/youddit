@@ -139,3 +139,18 @@ function prevVideo(){
         set_title(next['title'], next['permalink']);
     }
 }
+
+// pause the video
+function pauseVideo(){
+    console.log('pausing video ' + counter);
+    if (pauseFlag < 1){
+        player.pauseVideo();
+        document.getElementById("pButton").innerHTML="<i class='icon-play'></i>";
+        pauseFlag = 1;
+    }
+    else {
+    	player.playVideo();
+    	document.getElementById("pButton").innerHTML="<i class='icon-pause'></i>";
+    	pauseFlag = 0;
+    }
+}
