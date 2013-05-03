@@ -36,7 +36,6 @@ class Videos():
             data = {}
             data["subreddit"] = self.subreddit 
             data["cat"] = cat
-            data["videos"] = [] 
             data['videos'] = [ v for v in query ]
         
             # If data is older than a day, update videos
@@ -77,6 +76,7 @@ class Videos():
                                                    "status": 0
                                                  }, True )
         self._clean_up(r, ver)
+        self._generate_bg_remote(r);
 
     def _load_videos_remote(self, r):
         from workers import video_worker
@@ -116,11 +116,6 @@ class Videos():
                     if vid == '':
                         continue
                     position += 1
-                    try:
-                        self._generate_bg(vid)
-                    except Exception as e:
-                        print e
-                        pass
 
                     # appending the video data to the videos list
                     videos.append({ "rid": r['id'], # Reddit id
@@ -199,18 +194,23 @@ class Videos():
             v._load_videos(r)
     
     """ Background images """
-    
+    def _generate_bg_remote(self, subreddit):
+        from workers import generate_bg_worker
+        generate_bg_worker.delay(subreddit)
+
     def _generate_bg(self, vid):
         import os
         if not os.getcwd().endswith('/static/bg/temp'):
-            print os.getcwd()
-            print 'ZZZ'
             os.chdir("../../static/bg/temp")
         
         if not self._bg_exists(vid):
-            os.system("wget http://img.youtube.com/vi/%(id)s/hqdefault.jpg -O %(id)s.jpg"%{'id': vid})
-            os.system("convert %(id)s.jpg -modulate 100,0 -blur 0x12 -resize 1200 ../%(id)s.png"%{'id': vid})
-            os.remove("%(id)s.jpg"%{'id': vid})
+            try:
+                os.system("wget http://img.youtube.com/vi/%(id)s/mqdefault.jpg -O %(id)s.jpg"%{'id': vid})
+                os.system("convert %(id)s.jpg -modulate 100,0 -blur 0x5 -resize 1200 ../%(id)s.png"%{'id': vid})
+                os.remove("%(id)s.jpg"%{'id': vid})
+            except Exception as e:
+                print e
+                pass
 
     def _bg_exists(self, vid):
         import os

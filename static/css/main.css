@@ -1,12 +1,7 @@
-html {
+body {
     background-image:url('http://img.youtube.com/vi/Bf38HiYPMiI/hqdefault.jpg'); 
     background-size:100%;
     background-color:#1b1b1b;
-    -webkit-filter: grayscale(1) blur(10px);
-}
-}
-
-body {
 }
 
 #title {
