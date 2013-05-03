@@ -97,7 +97,7 @@ function playListClick() {
     player.stopVideo();
     var next = next_video();
     player.loadVideoById(next['vid']);
-    $('body').css({'background-image': "url('./static/bg/" + next['vid'] + ".png')"})
+    $('body').css({'background-image': "url('../static/bg/" + next['vid'] + ".png')"})
     set_title(next['title'], next['permalink']);
 }
 
@@ -127,7 +127,7 @@ function nextVideo(){
         player.stopVideo();
         player.loadVideoById(next['vid']);
         set_title(next['title'], next['permalink']);
-        $('body').css({'background-image': "url('./static/bg/" + next['vid'] + ".png')"})
+        $('body').css({'background-image': "url('../static/bg/" + next['vid'] + ".png')"})
     }
 }
 
@@ -139,7 +139,7 @@ function prevVideo(){
         player.stopVideo();
         player.loadVideoById(next['vid']);
         set_title(next['title'], next['permalink']);
-        $('body').css({'background-image': "url('./static/bg/" + next['vid'] + ".png')"})
+        $('body').css({'background-image': "url('../static/bg/" + next['vid'] + ".png')"})
     }
 }
 
