@@ -170,7 +170,11 @@
 
             }
             })(jQuery);
+            var youtube_api_called = false;
             function onYouTubePlayerAPIReady() {
+                    if (youtube_api_called == true) 
+                        return;
+                    youtube_api_called = true;
                     var first_vid = next_video();
                     player = new YT.Player('player', {
                       height: '378',
