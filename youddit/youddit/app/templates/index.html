@@ -45,14 +45,17 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-info-sign"></i> How it Works</a>
                                 <ul class="dropdown-menu">
-                                    Arrow Keys and Space. More info coming soon.<br><br>Shamil Israq<br>Liang Yao
+                                    Arrow Keys(Chrome only) and Space. More info coming soon.<br><br>Shamil Israq<br>Liang Yao
                                 </ul>
                             </li>
                             <li class="divider-vertical"></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-star"></i> Popular Streams</a>
                                 <ul class="dropdown-menu">
-                                    List of popular streams coming soon.
+                                    List of popular streams 
+                                    {% for p in popular %}
+                                    <li> <a class='brand' href='./r/{{ p }}'>{{ p }}</a> </li>
+                                    {% endfor %}
                                 </ul>
                             </li>
                             <li class="divider-vertical"></li>

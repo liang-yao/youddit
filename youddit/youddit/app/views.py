@@ -10,7 +10,7 @@ def index(request):
     v = Videos(subreddit='videos')
     data = v.get_videos('hot', 1, VideosView.LIMIT) 
     template = loader.get_template('index.html')
-    context = RequestContext(request, { "data": json.dumps(data) })
+    context = RequestContext(request, { "data": json.dumps(data), "popular": getPopular() })
     return HttpResponse(template.render(context))
 
 def subreddit(request, subreddit):
@@ -27,6 +27,12 @@ def subreddit(request, subreddit):
 
     context = RequestContext(request, { "loading": loading, "data_raw": json.dumps(data), "data": data, "subreddit": subreddit })
     return HttpResponse(template.render(context))
+
+def getPopular():
+    conn = MongoClient()
+    db = conn.Youddit
+    r = [ i['name'] for i in db.subreddits.find({'name': {'$ne': 'videos'}}, {'name': 1, '_id': 0}).sort('ver', -1).limit(5) ]
+    return r
 
 class VideosView(View):
     # Page size, 100 max, 25 default
