@@ -25,7 +25,7 @@ def subreddit(request, subreddit):
     else:
         loading = False
 
-    context = RequestContext(request, { "loading": loading, "data_raw": json.dumps(data), "data": data, "subreddit": subreddit })
+    context = RequestContext(request, { "loading": loading, "data_raw": json.dumps(data), "data": data, "subreddit": subreddit, "popular": getPopular() })
     return HttpResponse(template.render(context))
 
 def getPopular():
