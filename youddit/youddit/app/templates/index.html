@@ -180,7 +180,6 @@
                     autoScrollingDelay:500, 
                     onLast: load_more
                 });
-
             }
             })(jQuery);
             var youtube_api_called = false;
@@ -200,7 +199,7 @@
                         'onError' : onPlayerError
                       }
                 });
-                
+    
                  $('body').css({'background-image': "url('../static/bg/" + first_vid['vid'] + ".png')"})
                  set_title(first_vid['title'], first_vid['permalink']);
                 }
@@ -237,7 +236,6 @@
                 var url = "../r/" + $('form :input').val();
                 window.location.href = url;
             });
-
 
         </script>        
       <script>
