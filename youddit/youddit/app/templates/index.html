@@ -233,7 +233,7 @@
 
             $("form[name='search']").submit( function(e) {
                 e.preventDefault();
-                var url = "../r/" + $('form :input').val();
+                var url = "../r/" + $("form[name='search'] :input").val();
                 window.location.href = url;
             });
 
