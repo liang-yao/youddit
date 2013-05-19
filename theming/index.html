@@ -92,14 +92,14 @@
             </div>
             <div id="tS2" class="jThumbnailScroller">
                     <div class = "span 4 offset3">       
-                        <form class="form-inline">
+                        <form name='search' class="form-inline">
                             <div class="input-prepend input-append">
                                 <span class="add-on">/r/</span>
-                                <input class="span2" id="appendedPrependedInput" type="text" placeholder="videos">
-                                <select class="span1">
-                                    <option>Hot</option>
-                                    <option>Top</option>
-                                    <option>New</option>
+                                <input name='input' class="span2" id="appendedPrependedInput" type="text" placeholder="videos">
+                                <select class="span1" onChange='change_cat(this)'>
+                                    <option value='hot'>Hot</option>
+                                    <option value='top'>Top</option>
+                                    <option value='controversial'>Controversial</option>
                                 </select>
                                 <button class="btn" type="button">Go!</button>
                             </div>
@@ -142,6 +142,10 @@
                 -->
             </footer>
         </div> <!-- /container -->
+        
+        <script type='text/template' id='playlist_template'>
+            <a href="#" data-id=<%= id %> class="darken"><img src="http://img.youtube.com/vi/<%= vid %>/mqdefault.jpg"/><div data-id=<%= id %> class="thumbTitle"><%= title %></div></a>
+        </script>
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="http://www.youtube.com/player_api"></script>

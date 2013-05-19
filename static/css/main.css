@@ -124,10 +124,10 @@ a:hover > [class*=" icon-"] {
   background-image: url("../img/glyphicons-halflings-white.png");
 }
 
- /**/
+/*Top navbar  themeing */
 
 .dropdown-menu{
-    background-color:rgba(26,26,26,0.8);
+    background-color:rgb(26,26,26);
 }
 
 .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
@@ -138,6 +138,27 @@ a:hover > [class*=" icon-"] {
 .navbar .nav > li > a:focus, .navbar .nav > li > a:hover {
   color: #fff;
 }
+
+.navbar .nav > li > .dropdown-menu:after {
+  border-bottom: 6px solid rgb(26,26,26);
+}
+
+p{
+	padding: 0 18px;
+}
+
+.dropdown-menu > li > a {
+  color: white;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
+  background-color: #333;
+  background-image: linear-gradient(to bottom, #333, #444);
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+/****/
 
 a:active,a:focus {
     outline: none;
@@ -163,134 +184,39 @@ form {
 }
 
 .input-append .add-on, .input-prepend .add-on {
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
-  /*background-color: black;*/
   background-color: rgba(26,26,26,0.4);
   border-bottom-color: rgba(26,26,26,0.4);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-image-outset: 0 0 0 0;
-  border-image-repeat: stretch stretch;
-  border-image-slice: 100% 100% 100% 100%;
-  border-image-source: none;
-  border-image-width: 1 1 1 1;
-
   border-left: 1px solid rgba(26,26,26,0.4);
   border-right: 1px solid rgba(26,26,26,0.4);
-
   border-top-color: rgba(26,26,26,0.4);
-  border-top-style: solid;
-  border-top-width: 1px;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: normal;
-  height: 20px;
-  line-height: 20px;
-  min-width: 16px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 4px;
-  text-align: center;
   text-shadow: 0 1px 0 rgba(26,26,26,0.4);
 }
 
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
   background-color: rgba(255,255,255,0.1);
   border-bottom-color: rgba(26,26,26,0.4);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-image-outset: 0 0 0 0;
-  border-image-repeat: stretch stretch;
-  border-image-slice: 100% 100% 100% 100%;
-  border-image-source: none;
-  border-image-width: 1 1 1 1;
-  
   border-left: 1px solid rgba(26,26,26,0.4);
   border-right: 1px solid rgba(26,26,26,0.4);
   color: #DDDDDD;
-
   border-top-color: rgba(26,26,26,0.4);
-  border-top-style: solid;
-  border-top-width: 1px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-  transition-delay: 0s, 0s;
-  transition-duration: 0.2s, 0.2s;
-  transition-property: border, box-shadow;
-  transition-timing-function: linear, linear;
 }
 
 select {
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
   background-color: rgba(255,255,255,0.1);
   border-bottom-color: rgba(26,26,26,0.4);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-image-outset: 0 0 0 0;
-  border-image-repeat: stretch stretch;
-  border-image-slice: 100% 100% 100% 100%;
-  border-image-source: none;
-  border-image-width: 1 1 1 1;
-  
   border-left: 1px solid rgba(26,26,26,0.4);
   border-right: 1px solid rgba(26,26,26,0.4);
-
   border-top-color: rgba(26,26,26,0.4);
-  border-top-style: solid;
-  border-top-width: 1px;
   width: 220px;
   color: #DDDDDD;
 }
 
 .btn {
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
   background: none;
-  /*background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);*/
   background-image: none;
   border-bottom-color: rgba(26,26,26,0.4);
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-image-outset: 0 0 0 0;
-  border-image-repeat: stretch stretch;
-  border-image-slice: 100% 100% 100% 100%;
-  border-image-source: none;
-  border-image-width: 1 1 1 1;
-
   border-left: 1px solid rgba(26,26,26,0.4);
   border-right: 1px solid rgba(26,26,26,0.4);
-
   border-top-color: rgba(26,26,26,0.4);
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
   color: #DDDDDD;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 14px;
-  line-height: 20px;    
-  margin-bottom: 0;
-  padding-bottom: 4px;
-  padding-left: 12px;
-  padding-right: 12px;
-  padding-top: 4px;
-  text-align: center;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-  vertical-align: middle;
 }

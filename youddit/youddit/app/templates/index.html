@@ -44,25 +44,33 @@
                             <li class="divider-vertical"></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-info-sign"></i> How it Works</a>
-                                <ul class="dropdown-menu">
-                                    Arrow Keys(Chrome only) and Space. More info coming soon.<br><br>Shamil Israq<br>Liang Yao
-                                </ul>
-                            </li>
-                            <li class="divider-vertical"></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-star"></i> Popular Streams</a>
-                                <ul class="dropdown-menu">
-                                    List of popular streams 
-                                    {% for p in popular %}
-                                    <li> <a class='brand' href='/r/{{ p }}'>/r/{{ p }}</a> </li>
-                                    {% endfor %}
+                                <ul class="dropdown-menu" style="width:440px;">
+                                    <p style="padding-top:8px;">Youddit combines the best of <strong>You</strong>Tube and re<strong>ddit</strong>.</p>
+                                    <img alt="stream selection" src="{{ STATIC_URL }}img/stream.png" style="float:right; padding-left:18px; padding-top:6px;">
+                                    <p><strong>1.</strong> Select a stream by entering the subreddit name and pressing Go!</p>
+                                    <p><strong>2.</strong> Sit back and enjoy the (endless) show!</p>
+                                    <p>Change the playing video by clicking on the playlist, or navigate the playlist using arrow keys. The spacebar pauses playback.</p>
+									<img alt="arrow key and space" src="{{ STATIC_URL }}img/keyboardScaled.png">
                                 </ul>
                             </li>
                             <li class="divider-vertical"></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-envelope"></i> Feedback</a>
                                 <ul class="dropdown-menu">
-                                    coming soon.
+                                	<div style="padding: 8px 16px 0 16px;">We value any and all feedback. Please send us a message!
+                                    <form class="form-horizontal">
+                                    	<input class="span2" type="email" placeholder="Email" required>
+                                    	<textarea rows="3" placeholder="Feedback" ></textarea>
+                                    	<button class="btn btn-inverse" type="button">Send</button>
+                                	</form>
+                                	</div>
+                                </ul>
+                            </li>
+                            <li class="divider-vertical"></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-star"></i> Popular Streams</a>
+                                <ul class="dropdown-menu">
+                                    <p>Coming Soon</p>
                                 </ul>
                             </li>
                         </ul>
@@ -75,7 +83,7 @@
                 <div class="span7" id="player"></div>
                 <!-- <div id="infoRight"> -->
                 <div class="span4" id="vidTitle">
-                    <a href='#' id="title">Welcome!</a>
+                    <div id="title">Welcome!</div>
                 </div> 
             </div>
             <div id="tS2" class="jThumbnailScroller">
