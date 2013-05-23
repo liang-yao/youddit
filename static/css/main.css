@@ -20,6 +20,7 @@ body {
     width: 1170px;
     position: fixed;
     top: 0;
+    z-index: 10;
 }
 
 .navbar-inner {
