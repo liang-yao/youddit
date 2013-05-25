@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from app.views import VideosView
+from app.views import VideosView, FeedbackView
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -8,6 +8,7 @@ from app.views import VideosView
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'youddit.app.views.index', name='index'),
+    url(r'^feedback$', FeedbackView.as_view(), name='feedback'),
     url(r'^r/(?P<subreddit>\w+)$', 'youddit.app.views.subreddit', name='subreddit'),
     url(r'^(?P<subreddit>\w+)$', VideosView.as_view(), name='get_videos'),
 

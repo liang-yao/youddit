@@ -205,8 +205,8 @@ class Videos():
         
         if not self._bg_exists(vid):
             try:
-                os.system("wget http://img.youtube.com/vi/%(id)s/mqdefault.jpg -O %(id)s.jpg"%{'id': vid})
-                os.system("convert %(id)s.jpg -modulate 200,0 -blur 0x5 -resize 1200 ../%(id)s.png"%{'id': vid})
+                os.system("wget http://img.youtube.com/vi/%(id)s/mqdefault.jpg -O %(id)s.jpg > /dev/null"%{'id': vid})
+                os.system("convert %(id)s.jpg -modulate 200,0 -blur 0x5 -resize 1200 ../%(id)s.png > /dev/null"%{'id': vid})
                 os.remove("%(id)s.jpg"%{'id': vid})
             except Exception as e:
                 print e

@@ -57,11 +57,12 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-envelope"></i> Feedback</a>
                                 <ul class="dropdown-menu">
-                                	<div style="padding: 8px 16px 0 16px;">We value any and all feedback. Please send us a message!
-                                    <form class="form-horizontal">
-                                    	<input class="span2" type="email" placeholder="Email" required>
-                                    	<textarea rows="3" placeholder="Feedback" ></textarea>
-                                    	<button class="btn btn-inverse" type="button">Send</button>
+                                    <div style="padding: 8px 16px 0 16px;">We value any and all feedback. Please send us a message!
+                                    <form class="form-horizontal" action='/feedback' method='post'>
+                                    {% csrf_token %}
+                                    	<input class="span2" type="email" placeholder="Email" name='email' required>
+                                    	<textarea rows="3" placeholder="Feedback" name='msg'></textarea>
+                                    	<button class="btn btn-inverse" type="submit">Send</button>
                                 	</form>
                                 	</div>
                                 </ul>
@@ -93,7 +94,7 @@
                         <form name='search' class="form-inline">
                             <div class="input-prepend input-append">
                                 <span name='input' class="add-on">/r/</span>
-                                <input class="span2" id="appendedPrependedInput" type="text" placeholder="videos">
+                                <input class="span2" id="appendedPrependedInput" type="text" placeholder="{{ subreddit }}">
                                  <select class="span1" onChange='change_cat(this)'>
                                     <option value='hot'>Hot</option>
                                     <option value='top'>Top</option>

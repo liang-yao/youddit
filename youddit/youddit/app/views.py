@@ -1,8 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext, loader
 from django.views.generic import View
 from pymongo import MongoClient
-from time import time
+from time import time, strftime, gmtime
 from youddit.videos import Videos
 import simplejson as json
 
@@ -33,6 +33,23 @@ def getPopular():
     db = conn.Youddit
     r = [ i['name'] for i in db.subreddits.find({'name': {'$ne': 'videos'}}, {'name': 1, '_id': 0}).sort('ver', -1).limit(5) ]
     return r
+
+class FeedbackView(View):
+    
+    def post(self, request):
+        email = request.POST['email']
+        msg = request.POST['msg']
+        conn = MongoClient()
+        db = conn.Youddit
+        db.feedback.insert({'email': email, 'msg': msg, 'time': strftime("%a, %d %b %Y %H:%M:%S", gmtime())})
+        return HttpResponseRedirect('/')
+    
+    def get(self, request):
+        conn = MongoClient()
+        db = conn.Youddit
+
+        fb = db.feedback.find({}, {'_id': 0}).sort('$natural', -1)
+        return HttpResponse(fb)
 
 class VideosView(View):
     # Page size, 100 max, 25 default
