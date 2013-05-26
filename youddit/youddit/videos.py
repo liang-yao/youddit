@@ -146,7 +146,7 @@ class Videos():
             response = urllib2.urlopen(req)
         except urllib2.HTTPError as e:
             print e
-            if e.code == 502:
+            if e.code == 502 or e.code == 504:
                 time.sleep(5)
                 return self._request(url, params)
             else:
